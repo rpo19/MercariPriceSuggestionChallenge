@@ -1,0 +1,6 @@
+*.7z
+*.zip
+*.tsv
+*.csv
+.ipynb_checkpoints
+venv
