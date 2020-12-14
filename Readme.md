@@ -7,3 +7,10 @@ Go to https://www.kaggle.com/c/mercari-price-suggestion-challenge and download t
 ```
 kaggle competitions download -c mercari-price-suggestion-challenge
 ```
+
+## TODO
+
+- CountVectorizer -> keras
+- Tf idf -> keras
+- keras (tokenizer "layer" + regression)
+- transformer / bert
