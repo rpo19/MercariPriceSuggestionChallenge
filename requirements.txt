@@ -6,3 +6,5 @@ jupyter
 jupytext
 matplotlib
 seaborn
+pydot
+graphviz
