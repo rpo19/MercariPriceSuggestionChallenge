@@ -1,0 +1,30 @@
+regression a partire da testo
+approcci
+
+pca/correlation on non textual features?
+
+no name and no description after 10 epochs
+```
+loss                                          0.693718
+mse                                        1555.773438
+mae                                          15.856048
+root_mean_squared_error                      39.443295
+mean_squared_logarithmic_error                0.482018
+root_mean_squared_logarithmic_error           0.693717
+val_loss                                      0.682902
+val_mse                                    1479.040527
+val_mae                                      15.614505
+val_root_mean_squared_error                  38.458298
+val_mean_squared_logarithmic_error            0.467153
+val_root_mean_squared_logarithmic_error       0.683015
+```
+
+best in 25 epochs
+```
+2261/2261 [==============================] - 8s 3ms/step - loss: 0.6856 - mse: 1543.9764 - mae: 15.6968 - root_mean_squared_error: 39.2935 - mean_squared_logarithmic_error: 0.4709 - root_mean_squared_logarithmic_error: 0.6856 - val_loss: 0.6812 - val_mse: 1474.0504 - val_mae: 15.5475 - val_root_mean_squared_error: 38.3934 - val_mean_squared_logarithmic_error: 0.4648 - val_root_mean_squared_logarithmic_error: 0.6813
+```
+
+random gaussian/normal classifier
+```
+root_mean_squared_logarithmic_error: 1.870709278210477
+```
