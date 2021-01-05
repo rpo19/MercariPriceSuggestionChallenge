@@ -5,14 +5,21 @@ In addition, all necessary data manipulation processes, such as cleaning and enr
 
 Il Dataset consiste in un elenco di 1391082 prodotti descritti tramite le seguenti caratteristiche:
 \subsubsection{Price}
-textbf{Price} rappresenta il prezzo per il quale l'articolo è stato venduto (variabile target).
+\textbf{Price} rappresenta il prezzo per il quale l'articolo è stato venduto (variabile target).
 Il prezzo medio è di circa \$26, con un valore minimo pari a \$0 e un valore massimo pari a \$2009; inoltre, presenta una deviazione standard di circa \$38.
 Analizzando i percentili ci si accorge che i prezzi sono relativamente bassi in quanto il 75\% dei prodotti hanno un prezzo al di sotto di \$29.
+\subsubsection{Train id}
+\textbf{Train\_id} rappresenta l'identificativo del prodotto nell'elenco.
+\subsubsection{Name}
+\textbf{Name} è il nome del prodotto sotto forma di dato non strutturato.
 \subsubsection{Shipping}
 \textbf{Shipping} è caratterizzato dal valore 1 se la tassa di spedizione è a carico del venditore, altrimenti 0 se è a carico dell'acquirente.
 Questo attributo è decentemente ripartito tra i venditori e gli acquirenti, in quanto il 55\% dei prodotti prevede un valore di 0.
 Analizzando i prezzo degli articoli ci si aspetta che per quelli che la tassa di spedizione è a carico del venditore avranno un prezzo più alto. Tuttavia, ci sono una serie di fattori contrastanti. Questo può essere vero all'interno di specifiche categorie di prodotti e condizioni degli articoli, ma non quando si confrontano gli articoli sul totale. 
 Infatti, il prezzo medio pagato dagli utenti che devono pagare le spese di spedizione (circa \$30) è superiore a quelli che non richiedono costi di spedizione aggiuntivi (circa \$22).
+\subsubsection{Item condition}
+\textbf{Item\_condition\_id} rappresenta lo stato del prodotto fornito dal venditore, questo valore varia da 1 a 5.
+Il valore più frequente è 1, mentre 4 e 5 sono i più rari. Nei dati non è presente una descrizione dettagliata sul significato di questi valori, analizzando il dataset si può supporre che il valore 1 identifica la condizione migliore poichè è la più frequente, mentre il valore 5 identifica la condizione peggiore. Tuttavia calcolando i prezzi medi di vendita per ogni condizione non si riesce ad arrivare a una conclusione sicura poichè la condizione 5 è quella con il prezzo medio più alto, mentre la condizione 4 è quella con il prezzo medio più basso e le restanti categorie presentano un prezzo medio molto vicino.
 \subsubsection{Category Name}
 \textbf{Category\_name} rappresenta la categoria di prodotto a cui appartiene l'articolo.
 Nel dataset sono presenti 1287 categorie univoche e tra ognuna di esse si vede una categoria principale/generale, seguita da due o più sottocategorie più specifiche (ad esempio: Women/Tops \& Blouses/T-Shirts). Inoltre, ci sono 6327 articoli che non hanno una categoria assegnata.
@@ -20,6 +27,6 @@ Infine, analizzando le dieci categorie più popolari, si nota che l'abbigliament
 \subsubsection{Brand Name}
 \textbf{Brand\_name} rappresenta il marchio dell'articolo; nel dataset sono presenti 4809 valori differenti e 632682 valori mancanti.
 \subsubsection{Item Description}
-textbf{Item\_description} rappresenta la descrizione del prodotto sotto forma di dato non strutturato. Nel dataset sono presenti 4 istanze senza descrizione e 82494 descrizioni con la stringa "no description yet".
+\textbf{Item\_description} rappresenta la descrizione del prodotto sotto forma di dato non strutturato. Nel dataset sono presenti 4 istanze senza descrizione e 82494 descrizioni con la stringa "no description yet".
 Inoltre, non esiste una correlazione tra la lunghezza delle descrizioni e il prezzo, in quanto c'è una correlazione di 0.048.
 \textbf{AGGIUNGERE WORDCLOUD}
