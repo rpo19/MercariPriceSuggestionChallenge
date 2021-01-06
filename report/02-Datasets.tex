@@ -29,4 +29,40 @@ Infine, analizzando le dieci categorie più popolari, si nota che l'abbigliament
 \subsubsection{Item Description}
 \textbf{Item\_description} rappresenta la descrizione del prodotto sotto forma di dato non strutturato. Nel dataset sono presenti 4 istanze senza descrizione e 82494 descrizioni con la stringa "no description yet".
 Inoltre, non esiste una correlazione tra la lunghezza delle descrizioni e il prezzo, in quanto c'è una correlazione di 0.048.
-\textbf{AGGIUNGERE WORDCLOUD}
+Analizzando le word cloud ottenute tramite i bigrammi delle descrizioni  dei prodotti suddivisi in quattro fasce di prezzo: prezzo $>=$100 (Figura \ref{fig:100}), 50$<$ prezzo $<$100 (Figura \ref{Fig:50_100}), 30$<$ prezzo $<=$50 (Figura \ref{fig:30_50}) e prezzo $<=30$ (Figura \ref{Fig:minore_30}); si riescono a notare delle differenze sulle parole più frequenti. Infatti, nella wordcloud di Figura sono molto frequenti bigrammi che danno informazioni sulle buone condizioni dei prodotti, ad esempio:  100 authentic, great condition e good condition.
+Diminuendo di prezzo questi bigrammi diventano meno frequenti, ma aumentano i bigrammi relativi a descrizioni mancanti.
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{maggiore_100}
+	\caption{Word Cloud contenente i bigrammi ottenuti dalle descrizioni dei prodotti con prezzo maggiore o uguale a 100}
+	\label{fig:100}   
+	\end{minipage}\hfill
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{50_100}
+     \caption{Word Cloud contenente i bigrammi ottenuti dalle descrizioni dei prodotti con prezzo maggiore di 50 e minore di 100}
+     \label{Fig:50_100}
+   \end{minipage}
+\end{figure}
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{30_50}
+	\caption{Word Cloud contenente i bigrammi ottenuti dalle descrizioni dei prodotti con prezzo maggiore di 30 e minore o uguale a 50}
+	\label{fig:30_50}   
+	\end{minipage}\hfill
+   \begin{minipage}{0.48\textwidth}
+     \centering
+     \includegraphics[width=.9\linewidth]{minore_30}
+     \caption{Word Cloud contenente i bigrammi ottenuti dalle descrizioni dei prodotti con prezzo minore o uguale a 30}
+     \label{Fig:minore_30}
+   \end{minipage}
+\end{figure}
+
+\end{document}
+
+
+
