@@ -16,11 +16,12 @@ Analizzando i percentili ci si accorge che i prezzi sono relativamente bassi in 
 \subsubsection{Shipping}
 \textbf{Shipping} è caratterizzato dal valore 1 se la tassa di spedizione è a carico del venditore, altrimenti 0 se è a carico dell'acquirente.
 Questo attributo è decentemente ripartito tra i venditori e gli acquirenti, in quanto il 55\% dei prodotti prevede un valore di 0.
-Analizzando i prezzo degli articoli ci si aspetta che per quelli che la tassa di spedizione è a carico del venditore avranno un prezzo più alto. Tuttavia, ci sono una serie di fattori contrastanti. Questo può essere vero all'interno di specifiche categorie di prodotti e condizioni degli articoli, ma non quando si confrontano gli articoli sul totale. 
-Infatti, il prezzo medio pagato dagli utenti che devono pagare le spese di spedizione (circa \$30) è superiore a quelli che non richiedono costi di spedizione aggiuntivi (circa \$22).
+Analizzando il prezzo degli articoli ci si aspetta che quelli i cui costi di spedizione sono a carico del venditore avranno un prezzo più alto. Tuttavia, ci sono una serie di fattori contrastanti. Questo può essere vero all'interno di specifiche categorie di prodotti e condizioni degli articoli, ma non quando si confrontano gli articoli sul totale. 
+Infatti, il prezzo medio pagato dagli utenti che devono pagare le spese di
+spedizione (circa \$30) è superiore a quello dei prodotti la cui spedizione è pagata dal venditore (circa \$22).
 \subsubsection{Item condition}
 \textbf{Item\_condition\_id} rappresenta lo stato del prodotto fornito dal venditore, questo valore varia da 1 a 5.
-Il valore più frequente è 1, mentre 4 e 5 sono i più rari. Nei dati non è presente una descrizione dettagliata sul significato di questi valori, analizzando il dataset si può supporre che il valore 1 identifica la condizione migliore poichè è la più frequente, mentre il valore 5 identifica la condizione peggiore. Tuttavia calcolando i prezzi medi di vendita per ogni condizione non si riesce ad arrivare a una conclusione sicura poichè la condizione 5 è quella con il prezzo medio più alto, mentre la condizione 4 è quella con il prezzo medio più basso e le restanti categorie presentano un prezzo medio molto vicino.
+Il valore più frequente è 1, mentre 4 e 5 sono i più rari. Nei dati non è presente una descrizione dettagliata sul significato di questi valori, analizzando il dataset si può supporre che il valore 1 identifichi la condizione migliore poichè è la più frequente, mentre il valore 5 la condizione peggiore. Tuttavia calcolando i prezzi medi di vendita per ogni condizione non si riesce ad arrivare a una conclusione sicura poichè la condizione 5 è quella con il prezzo medio più alto, mentre la condizione 4 è quella con il prezzo medio più basso e le restanti categorie presentano un prezzo medio molto vicino.
 \subsubsection{Category Name}
 \textbf{Category\_name} rappresenta la categoria di prodotto a cui appartiene l'articolo.
 Nel dataset sono presenti 1287 categorie univoche e tra ognuna di esse si vede una categoria principale/generale, seguita da due o più sottocategorie più specifiche (ad esempio: Women/Tops \& Blouses/T-Shirts). Inoltre, ci sono 6327 articoli che non hanno una categoria assegnata.
@@ -72,4 +73,8 @@ Sui dati testuali è stata effettuata una fase di lemmatizzazione (perchè usa v
 I valori del campo category\_name sono stati codificati in interi tramite la tecnica label ecoding.
 \end{document}
 
-
+% todo: coefficiente di correlazione di  pearson?
+% todo: piccole analisi come correlazioni sono da mettere qui? oppure nella
+% sezione dopo?
+% todo: far trasparire che abbiamo valutato entrambi gli approcci di text
+% cleaning o no
