@@ -1,5 +1,5 @@
-In this section the available data sets must be presented. The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
-In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
+%In this section the available data sets must be presented. %The term dataset refers to any type of information source, for example web services for geolocation fall into this category. 
+%In addition, all necessary data manipulation processes, such as cleaning and enrichment with external sources, must be presented and discussed.
 
 
 
@@ -32,7 +32,7 @@ Inoltre, non esiste una correlazione tra la lunghezza delle descrizioni e il pre
 Analizzando le word cloud ottenute tramite i bigrammi delle descrizioni  dei prodotti suddivisi in quattro fasce di prezzo: prezzo $>=$100 (Figura \ref{fig:100}), 50$<$ prezzo $<$100 (Figura \ref{Fig:50_100}), 30$<$ prezzo $<=$50 (Figura \ref{fig:30_50}) e prezzo $<=30$ (Figura \ref{Fig:minore_30}); si riescono a notare delle differenze sulle parole più frequenti. Infatti, nella wordcloud di Figura sono molto frequenti bigrammi che danno informazioni sulle buone condizioni dei prodotti, ad esempio:  100 authentic, great condition e good condition.
 Diminuendo di prezzo questi bigrammi diventano meno frequenti, ma aumentano i bigrammi relativi a descrizioni mancanti.
 
-\begin{figure}[!htb]
+\begin{figure}[H]
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.9\linewidth]{maggiore_100}
@@ -47,7 +47,7 @@ Diminuendo di prezzo questi bigrammi diventano meno frequenti, ma aumentano i bi
    \end{minipage}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
    \begin{minipage}{0.48\textwidth}
      \centering
      \includegraphics[width=.9\linewidth]{30_50}
@@ -61,8 +61,14 @@ Diminuendo di prezzo questi bigrammi diventano meno frequenti, ma aumentano i bi
      \label{Fig:minore_30}
    \end{minipage}
 \end{figure}
+\subsubsection{Pulizia Dataset}
+Dal dataset sono stati eliminati tutti i prodotti con prezzi minori di cinque e maggiori di 2000 poichè sul sito ufficiale di Mercari è specificato che i prezzi possono essere impostati solo nell'intervallo [5,2000] (fonte: \url{https://www.mercari.com/us/help_center/article/69}).
+Durante la fase di analisi si è scoperta la presenta di valori mancanti nei campi: item\_description, brand\_name e category\_name, questi valori sono stati rimpiazzati con il valore NA.
+Inoltre, è stato effettuato un trattamento dei dati (cito paper sul text preprocessing) non strutturati convertendoli tutti in minuscolo, sono state sostituite le descrizioni mancanti con il valore NA (anche quando era presente la stringa "no description yet").
+Sui dati testuali è stata effettuata una fase di lemmatizzazione (perchè usa vocabolario su cui tagliare le parole e cito articolo). Successivamente, sulle nuove parole ottenute è stata effettuata una fase di pulizia di questi campi non strutturati eliminando le stopwords, la punteggiatura, tutti i caratteri di lunghezza pari a 1 che non sono numeri (è stato deciso di mantenere tutti i numeri poichè molte descrizioni senza di essi perdono di significato) e sono state eliminate le emoji.
 
+
+I valori del campo category\_name sono stati codificati in interi tramite la tecnica label ecoding.
 \end{document}
-
 
 
