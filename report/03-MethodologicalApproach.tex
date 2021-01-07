@@ -1,16 +1,65 @@
+% This is the central and most important section of the report. Its objective must
+% be to show, with linearity and clarity, the steps that have led to the
+% definition of a decision model. The description of the working hypotheses,
+% confirmed or denied, can be found in this section together with the description
+% of the subsequent refining processes of the models. Comparisons between
+% different models (e.g. heuristics vs. optimal models) in terms of quality of
+% solutions, their explainability and execution times are welcome.
 
-This is the central and most important section of the report. Its objective must be to show, with linearity and clarity, the steps that have led to the definition of a decision model. The description of the working hypotheses, confirmed or denied, can be found in this section together with the description of the subsequent refining processes of the models. Comparisons between different models (e.g. heuristics vs. optimal models) in terms of quality of solutions, their explainability and execution times are welcome.
+% Do not attempt to describe all the code in the system, and do not include large
+% pieces of code in this section, use pseudo-code where necessary. Complete source
+% code should be provided separately (in Appendixes, as separated material or as a
+% link to an on-line repo). Instead pick out and describe just the pieces of code
+% which, for example:
 
-Do not attempt to describe all the code in the system, and do not include large pieces of code in this section, use pseudo-code where necessary. Complete source code should be provided separately (in Appendixes, as separated material or as a link to an on-line repo). Instead pick out and describe just the pieces of code which, for example:
+% \begin{itemize}
+%     \item are especially critical to the operation of the system;
+%     \item you feel might be of particular interest to the reader for some reason;
+%     \item  illustrate a non-standard or innovative way of implementing an algorithm, data
+%           structure, etc..
+% \end{itemize}
+
+% You should also mention any unforeseen problems you encountered when implementing the
+% system and how and to what extent you overcame them. Common problems are:
+% difficulties involving existing software.
+
+% todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
+
+\subsection{Valutazione}
+come abbiamo valutato le performance: perchè abbiamo usato rmsle, cosa è. altre
+misure di performance
+
+\subsubsection{regressore random normale}
+abbiamo tenuto come punto di riferimento un regressore random che fornisce
+prezzi da una normale con media e varianza dei nostri prezzi.
+
+\subsection{Categoriche}
+\textbf{Dire qualcosa sulle categoriche}
+
+Estratte performance di regressione a partire dalle sole categoriche.
+
+Qualche spiegazione del modello scelto.
+
+\subsection{modello}
+qualche spiegazione sulla definizione del modello.
+perchè le lstm, cosa sono, paper, lstm per il testo.
+
+performance gain delle lstm??
+perchè non abbiamo provato le gru?
+
+\subsection{Rappresentazione del Testo}
+Descrizione dei vari approcci nella storia (quando sono stati creati)
+
+deep learning e non
+
+\subsubsection{clean o raw}
+abbiamo valutato clean e raw; quali modelli beneficiano del cleanup, quali no?
+perchè? il deep learning impara meglio se il testo è raw?
 
 \begin{itemize}
-    \item are especially critical to the operation of the system;
-    \item you feel might be of particular interest to the reader for some reason;
-    \item  illustrate a non-standard or innovative way of implementing an algorithm, data
-          structure, etc..
+    \item bag of word based models: count vectorizer - tf/idf
+    \item embeddings: keras, glove pretrained. dire perchè non abbiamo provato
+    qualcosa tipo word2vec?
+    \item transformers con fine tuning
 \end{itemize}
-
-You should also mention any unforeseen problems you encountered when implementing the
-system and how and to what extent you overcame them. Common problems are:
-difficulties involving existing software.
 

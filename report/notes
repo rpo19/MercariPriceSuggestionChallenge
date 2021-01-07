@@ -28,3 +28,7 @@ random gaussian/normal classifier
 ```
 root_mean_squared_logarithmic_error: 1.870709278210477
 ```
+
+papers:
+https://arxiv.org/pdf/2004.03705.pdf
+papers originali su lstm, ...
