@@ -25,9 +25,55 @@
 
 % todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
 
-\subsection{Valutazione}
-come abbiamo valutato le performance: perchè abbiamo usato rmsle, cosa è. altre
-misure di performance
+\subsection{Metriche di valutazione}
+Le funzione di \textit{loss} utilizzata in fase di training è il \textit{Root
+Mean Squared Logaritmic Error}, in quanto è la misura scelta dalla Kaggle
+challenge per confrontare le performance dei vari partecipanti. Inoltre essa
+risulta adeguata al problema considerando il vasto intervallo dei valori dei
+prezzi.
+
+Il \textit{Mean Absolute Error} è un'ulteriore metrica che è stata utilizzata
+perchè di più immediata comprensione.
+\\
+Mean Absolute Error (MAE):
+\begin{equation}
+    \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
+\end{equation}
+\\
+Mean Squared Error (MSE):
+\begin{equation}
+    \frac{1}{n} \sum_{i=1}^{n} ( y_i - \hat{y_i} )^2
+\end{equation}
+Il quadrato fornisce un peso maggiore agli errori dei valori più elevati\cite{rmse-or-mae}.
+\\
+Root Mean Squared Error (RMSE):
+\begin{equation}
+    \sqrt{ \frac{1}{n} \sum_{i=1}^{n} ( y_i - \hat{y_i} )^2}
+\end{equation}
+La radice dell'MSE, nella stessa scala dei valori.
+\\
+Mean Squared Logarithmic Error (MSLE):
+\begin{equation}
+    \frac{1}{n}
+        \sum_{i=1}^{n}
+            ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
+    =
+    \frac{1}{n}
+        \sum_{i=1}^{n}
+            \log^2(\frac{y_i+1}{\hat{y_i}+1})
+\end{equation}
+Essendo calcolato a partire da un rapporto riflette l'errore relativo e di
+conseguenza risulta efficace laddove i valore assoluti presentano variazioni considerevoli.
+\\
+Root Mean Squared Logarithmic Error (RMSLE):
+\begin{equation}
+    \sqrt{ 
+        \frac{1}{n}
+            \sum_{i=1}^{n}
+                ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
+    }
+\end{equation}
+La radice dell'MSLE.
 
 \subsubsection{regressore random normale}
 abbiamo tenuto come punto di riferimento un regressore random che fornisce
