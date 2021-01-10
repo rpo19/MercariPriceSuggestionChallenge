@@ -27,14 +27,14 @@
 
 \subsection{Metriche di valutazione}
 Le funzione di \textit{loss} utilizzata in fase di training è il \textit{Root
-Mean Squared Logaritmic Error}, in quanto è la misura scelta dalla Kaggle
+Mean Squared Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle
 challenge per confrontare le performance dei vari partecipanti. Inoltre essa
 risulta adeguata al problema considerando il vasto intervallo dei valori dei
 prezzi.
 
-Il \textit{Mean Absolute Error} è un'ulteriore metrica che è stata utilizzata
-perchè di più immediata comprensione.
-\\
+Di seguito la definizione e alcune osservazioni su di RMSLE insieme alle
+ulteriori metriche utilizzate; ad esempio il \textit{Mean Absolute Error (MAE)},
+che fornisce una più immediata comprensione rispetto al RMSLE. \\
 Mean Absolute Error (MAE):
 \begin{equation}
     \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
@@ -74,10 +74,6 @@ Root Mean Squared Logarithmic Error (RMSLE):
     }
 \end{equation}
 La radice dell'MSLE.
-
-\subsubsection{regressore random normale}
-abbiamo tenuto come punto di riferimento un regressore random che fornisce
-prezzi da una normale con media e varianza dei nostri prezzi.
 
 \subsection{Categoriche}
 \textbf{Dire qualcosa sulle categoriche}
