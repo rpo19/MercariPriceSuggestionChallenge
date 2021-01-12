@@ -25,12 +25,24 @@
 
 % todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
 
-\subsection{Metriche di valutazione}
-Le funzione di \textit{loss} utilizzata in fase di training è il \textit{Root
-Mean Squared Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle
-challenge per confrontare le performance dei vari partecipanti. Inoltre essa
-risulta adeguata al problema considerando il vasto intervallo dei valori dei
-prezzi.
+\subsection{Training e valutazione}
+
+\subsubsection{Dataset split}
+
+Al fine di valutare i vari modelli più correttamente possibile il dataset è
+stato suddiviso in \textit{training-set}, \textit{validation-set} e
+\textit{test-set}. Quindi il training è stato usato per l'allenamento, il
+validation per accertarsi che il modello non sia propenso all'overfitting ed il
+test per la valutazione finale.
+
+\subsubsection{Valutazione dell'errore}
+% loss e metriche
+
+Per quanto riguarda le performance in termini di errore la funzione di
+\textit{loss} utilizzata in fase di training è il \textit{Root Mean Squared
+Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle challenge
+per confrontare le performance dei vari partecipanti. Inoltre essa risulta
+adeguata al problema considerando il vasto intervallo dei valori dei prezzi.
 
 Di seguito la definizione e alcune osservazioni su di RMSLE insieme alle
 ulteriori metriche utilizzate; ad esempio il \textit{Mean Absolute Error (MAE)},
@@ -75,12 +87,34 @@ Root Mean Squared Logarithmic Error (RMSLE):
 \end{equation}
 La radice dell'MSLE.
 
+% dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
+% dai vari approcci
+
+\subsubsection{Valutazione dei costi computazionali}
+
+Il numero dei parametri allenabili dei vari modelli sono stati annotati insieme
+al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
+\textit{Google Colab} abilitando l'accelerazione hardware GPU.
+
 \subsection{Categoriche}
 \textbf{Dire qualcosa sulle categoriche}
 
-Estratte performance di regressione a partire dalle sole categoriche.
+Inizialmente sono state valutate le performance di regressione dei prezzi a
+partire dalle sole features categoriche in modo tale da stabilire un punto di
+partenza per la successiva analisi delle features testuali \textit{name} e
+\textit{item\_description}, più complesse e computazionalmente costose.
 
-Qualche spiegazione del modello scelto.
+Un semplice modello composto da due layer Densi è stato sufficiente a
+raggiungere le seguenti performance alla decima epoca con l'aiuto di un layer
+Dropout interposto ad essi per contrastare l'overfitting.
+
+% todo: qui mettere le performance
+
+% parlare di quanto tempo richiedono le 10 epoche.
+% del numero dei parametri del modello.
+% di quanti neuroni hanno i layers e perchè (magari fare una prova con vari
+% valori bassi e aumentarli senza esagerare fino a raggiungere le performance sopra)
+% parlare di qualche altro parametro? di training del modello?
 
 \subsection{modello}
 qualche spiegazione sulla definizione del modello.
