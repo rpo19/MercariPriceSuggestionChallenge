@@ -24,8 +24,13 @@
 % difficulties involving existing software.
 
 % todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
-
-\subsection{Training e valutazione}
+\subsection{Rappresentazione del Testo}
+\subsubsection{Bag of Words}
+\subsubsection{Tf-Idf}
+\subsubsection{Word Embeddings}
+Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per molti tasks. Tuttavia queste tecniche semplici sono al limite in molti compiti perché trattano le parole come unità atomiche, senza alcuna correlazione poiché vengono rappresentate come indici di un vocabolario. 
+Con lo sviluppo delle tecniche di Machine Learning sono nati modelli in grado di apprendere rappresentazioni vettoriali di alta qualità di parole provenienti da set di dati composti da miliardi di parole e con vocabolari di milioni di parole. Queste nuove tecniche generano rappresentazioni vettoriali delle parole che rispettano la similarità tra le parole considerando più gradi di somiglianza, rappresentando la regolarità semantica e sintattica, permettendo anche operazioni algebriche \cite{mikolov2013efficient}.
+\subsubsection{Training e valutazione}
 
 \subsubsection{Dataset split}
 
