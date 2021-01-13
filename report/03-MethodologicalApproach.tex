@@ -24,38 +24,6 @@
 % difficulties involving existing software.
 
 % todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
-\subsection{Rappresentazione del Testo}
-
-\subsubsection{Bag of Words}
-Il modello bag-of-words è una rappresentazione semplificata  di testi, dove ciascuno di essi è rappresentato come una "borsa" (vettore) delle sue parole. Quindi crea un vettore per ogni documento contenete il conteggio delle occorrenze di ciascuna parola del vocabolario nel documento. Questa tecnica ignora la grammatica e persino l'ordine delle parole, ma mantiene la molteplicità.
-\subsubsection{Tf-Idf}\label{section-tfidf}
-Tf-Idf (Term frequency-Inverse document frequency) \cite{tfidf2008} risolve uno dei principali problemi che si hanno con Bag of Words, poiché quest'ultima tecnica non considera relazioni tra i vari documenti. Infatti, Tf-Idf \eqref{eq:tf-idf} considera l'importanza di una parola per un documento in una collezione di documenti (corpus).
-Il vettore costruito per ogni documento tramite questa tecnica considera per ciascun termine del documento la frequenza con cui il termine compare in questo documento (Term Frequency, TF \eqref{eq:tf}) rispetto alla frequenza del termine in tutti i documenti (Inverse Document Frequency, IDF \eqref{eq:idf}).
-
-\begin{equation}
-\label{eq:tf-idf}
-   Tf-Idf_{t,d} = tf_{t,d} \cdot idf_t
-\end{equation}\\
-\begin{equation}
-\label{eq:tf}
-   tf_{t,d} = \frac{n_{t,d}}{number of terms in the document d} 
-\end{equation}\\
-\begin{equation}
-\label{eq:idf}
-   idf_{t} = \log \frac{number of documents}{number of documents with term t} 
-\end{equation}
-Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine e d indica il documento.
-\\
-\subsubsection{Word Embeddings}
-Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per molti tasks. Tuttavia queste tecniche semplici sono al limite in molti compiti perché trattano le parole come unità atomiche, senza alcuna correlazione poiché vengono rappresentate come indici di un vocabolario. 
-Con lo sviluppo delle tecniche di Machine Learning sono nati modelli in grado di apprendere rappresentazioni vettoriali di alta qualità di parole provenienti da set di dati composti da miliardi di parole e con vocabolari di milioni di parole. Queste nuove tecniche generano rappresentazioni vettoriali delle parole che rispettano la similarità tra le parole considerando più gradi di somiglianza, rappresentando la regolarità semantica e sintattica, permettendo anche operazioni algebriche \cite{mikolov2013efficient}.
-\subsubsection{GLOVE}
-GLOVE \cite{pennington2014glove} è un algoritmo di apprendimento non supervisionato che fornisce una rappresentazione vettoriale di ogni parola, considerando le statistiche globali di ricorrenza parola per parola (word-word ??????) da un corpus e le rappresentazioni ottenute mostrano sottostrutture lineari dello spazio vettoriale delle parole. Inoltre, gli ideatori di questa tecnica hanno reso disponibile i word embeddings pre-addestrati.
-Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
-\begin{itemize}
-	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un vocabolario di 400 mila parole;
-	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
-\end{itemize}
 \subsubsection{Training e valutazione}
 
 \subsubsection{Dataset split}
@@ -136,8 +104,8 @@ partenza per la successiva analisi delle features testuali \textit{name} e
 \textit{item\_description}, più complesse e computazionalmente costose.
 
 Un semplice modello composto da due layer Densi è stato sufficiente a
-raggiungere le seguenti performance alla decima epoca con l'aiuto di un layer
-Dropout interposto ad essi per contrastare l'overfitting.
+raggiungere le seguenti performance alla fine della decima epoca con l'aiuto di
+un layer Dropout interposto ad essi per contrastare l'overfitting.
 
 % todo: qui mettere le performance
 
@@ -146,6 +114,39 @@ Dropout interposto ad essi per contrastare l'overfitting.
 % di quanti neuroni hanno i layers e perchè (magari fare una prova con vari
 % valori bassi e aumentarli senza esagerare fino a raggiungere le performance sopra)
 % parlare di qualche altro parametro? di training del modello?
+
+\subsection{Rappresentazione del Testo}
+
+\subsubsection{Bag of Words}
+Il modello bag-of-words è una rappresentazione semplificata  di testi, dove ciascuno di essi è rappresentato come una "borsa" (vettore) delle sue parole. Quindi crea un vettore per ogni documento contenete il conteggio delle occorrenze di ciascuna parola del vocabolario nel documento. Questa tecnica ignora la grammatica e persino l'ordine delle parole, ma mantiene la molteplicità.
+\subsubsection{Tf-Idf}\label{section-tfidf}
+Tf-Idf (Term frequency-Inverse document frequency) \cite{tfidf2008} risolve uno dei principali problemi che si hanno con Bag of Words, poiché quest'ultima tecnica non considera relazioni tra i vari documenti. Infatti, Tf-Idf \eqref{eq:tf-idf} considera l'importanza di una parola per un documento in una collezione di documenti (corpus).
+Il vettore costruito per ogni documento tramite questa tecnica considera per ciascun termine del documento la frequenza con cui il termine compare in questo documento (Term Frequency, TF \eqref{eq:tf}) rispetto alla frequenza del termine in tutti i documenti (Inverse Document Frequency, IDF \eqref{eq:idf}).
+
+\begin{equation}
+\label{eq:tf-idf}
+   Tf-Idf_{t,d} = tf_{t,d} \cdot idf_t
+\end{equation}\\
+\begin{equation}
+\label{eq:tf}
+   tf_{t,d} = \frac{n_{t,d}}{number of terms in the document d} 
+\end{equation}\\
+\begin{equation}
+\label{eq:idf}
+   idf_{t} = \log \frac{number of documents}{number of documents with term t} 
+\end{equation}
+Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine e d indica il documento.
+\\
+\subsubsection{Word Embeddings}
+Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per molti tasks. Tuttavia queste tecniche semplici sono al limite in molti compiti perché trattano le parole come unità atomiche, senza alcuna correlazione poiché vengono rappresentate come indici di un vocabolario. 
+Con lo sviluppo delle tecniche di Machine Learning sono nati modelli in grado di apprendere rappresentazioni vettoriali di alta qualità di parole provenienti da set di dati composti da miliardi di parole e con vocabolari di milioni di parole. Queste nuove tecniche generano rappresentazioni vettoriali delle parole che rispettano la similarità tra le parole considerando più gradi di somiglianza, rappresentando la regolarità semantica e sintattica, permettendo anche operazioni algebriche \cite{mikolov2013efficient}.
+\subsubsection{GLOVE}
+GLOVE \cite{pennington2014glove} è un algoritmo di apprendimento non supervisionato che fornisce una rappresentazione vettoriale di ogni parola, considerando le statistiche globali di ricorrenza parola per parola (word-word ??????) da un corpus e le rappresentazioni ottenute mostrano sottostrutture lineari dello spazio vettoriale delle parole. Inoltre, gli ideatori di questa tecnica hanno reso disponibile i word embeddings pre-addestrati.
+Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
+\begin{itemize}
+	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un vocabolario di 400 mila parole;
+	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
+\end{itemize}
 
 \subsection{modello}
 qualche spiegazione sulla definizione del modello.
