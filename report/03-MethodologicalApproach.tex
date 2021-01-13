@@ -49,6 +49,13 @@ Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine e d ind
 \subsubsection{Word Embeddings}
 Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per molti tasks. Tuttavia queste tecniche semplici sono al limite in molti compiti perché trattano le parole come unità atomiche, senza alcuna correlazione poiché vengono rappresentate come indici di un vocabolario. 
 Con lo sviluppo delle tecniche di Machine Learning sono nati modelli in grado di apprendere rappresentazioni vettoriali di alta qualità di parole provenienti da set di dati composti da miliardi di parole e con vocabolari di milioni di parole. Queste nuove tecniche generano rappresentazioni vettoriali delle parole che rispettano la similarità tra le parole considerando più gradi di somiglianza, rappresentando la regolarità semantica e sintattica, permettendo anche operazioni algebriche \cite{mikolov2013efficient}.
+\subsubsection{GLOVE}
+GLOVE \cite{pennington2014glove} è un algoritmo di apprendimento non supervisionato che fornisce una rappresentazione vettoriale di ogni parola, considerando le statistiche globali di ricorrenza parola per parola (word-word ??????) da un corpus e le rappresentazioni ottenute mostrano sottostrutture lineari dello spazio vettoriale delle parole. Inoltre, gli ideatori di questa tecnica hanno reso disponibile i word embeddings pre-addestrati.
+Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
+\begin{itemize}
+	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un vocabolario di 400 mila parole;
+	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
+\end{itemize}
 \subsubsection{Training e valutazione}
 
 \subsubsection{Dataset split}
