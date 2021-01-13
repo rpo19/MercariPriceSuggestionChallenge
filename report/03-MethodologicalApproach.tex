@@ -118,9 +118,14 @@ un layer Dropout interposto ad essi per contrastare l'overfitting.
 \subsection{Rappresentazione del Testo}
 
 \subsubsection{Bag of Words}
-Il modello bag-of-words è una rappresentazione semplificata  di testi, dove ciascuno di essi è rappresentato come una "borsa" (vettore) delle sue parole. Quindi crea un vettore per ogni documento contenete il conteggio delle occorrenze di ciascuna parola del vocabolario nel documento. Questa tecnica ignora la grammatica e persino l'ordine delle parole, ma mantiene la molteplicità.
+Il modello bag-of-words è una rappresentazione semplificata  di testi, dove
+ciascuno di essi è rappresentato come una "borsa" (vettore) delle sue parole.
+Quindi crea un vettore per ogni documento contenete il conteggio delle
+occorrenze di ciascuna parola del vocabolario nel documento. Questa tecnica
+ignora la grammatica e persino l'ordine delle parole, ma mantiene la
+molteplicità \cite{manning_raghavan_schutze_2008}.
 \subsubsection{Tf-Idf}\label{section-tfidf}
-Tf-Idf (Term frequency-Inverse document frequency) \cite{tfidf2008} risolve uno dei principali problemi che si hanno con Bag of Words, poiché quest'ultima tecnica non considera relazioni tra i vari documenti. Infatti, Tf-Idf \eqref{eq:tf-idf} considera l'importanza di una parola per un documento in una collezione di documenti (corpus).
+Tf-Idf (Term frequency-Inverse document frequency) \cite{manning_raghavan_schutze_2008} risolve uno dei principali problemi che si hanno con Bag of Words, poiché quest'ultima tecnica non considera relazioni tra i vari documenti. Infatti, Tf-Idf \eqref{eq:tf-idf} considera l'importanza di una parola per un documento in una collezione di documenti (corpus).
 Il vettore costruito per ogni documento tramite questa tecnica considera per ciascun termine del documento la frequenza con cui il termine compare in questo documento (Term Frequency, TF \eqref{eq:tf}) rispetto alla frequenza del termine in tutti i documenti (Inverse Document Frequency, IDF \eqref{eq:idf}).
 
 \begin{equation}
