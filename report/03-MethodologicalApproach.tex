@@ -169,12 +169,27 @@ Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
 	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
 \end{itemize}
 \subsubsection{Transformers}
-\subsection{modello}
-qualche spiegazione sulla definizione del modello.
-perchè le lstm, cosa sono, paper, lstm per il testo.
+\subsection{modello}\label{Modello}
+Nella realizzazione di questo progetto sono stati utilizzati due modelli principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi i modelli condividono la seguente struttura:
+\begin{itemize}
+	\item \textbf{Concatenate layer}: concatena gli input in un singolo tensore;
+	\item \textbf{Dropout layer}: per escludere una frazione dell'input e il fattore utilizzato è 0.2;
+	\item \textbf{Dense layer}: composto da 32 neuroni e come funzione di attivazione usa la Relu;
+	\item \textbf{Dropout layer}: utilizza un fattore di 0.2;
+	\item \textbf{Dense layer}: composto da 16 neuroni e come funzione di attivazione usa la Relu;
+	\item \textbf{Dense layer}: rappresenta il layer di output ed è composto da un neurone con funzione di attivazione lineare poiché il task è una regressione;
+\end{itemize}
+\subsubsection{Word Embeddins}
+Il modello principale utilizzato per i Word Embeddings (sia pretrainati che non) tratta i seguenti input differentemente: descrizione del prodotto, variabili categoriche del prodotto (nome, categorie, brand, shipping e condizione) e nome del prodotto.
+La descrizione e il nome vengono rappresentati sotto forma di interi, dove ogni intero rappresenta l'indice di un token in un dizionario.
+Le variabili categoriche che non prevedevano un valore intero sono state convertite in valori interi.
+La descrizione prevede un layer di embedding, il quale crea la rappresentazione vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono apprendibili in quanto utilizziamo quelli pretrainati.
+Successivamente sono stati utilizzati due layer LSTM Bidirezionali per trattare questo input e il primo layer prevede 16 celle LSTM e un fattore di dropout di 0.2, mentre il secondo prevede 8 celle LSTM e anch'esso utilizza un fattore di dropout di 0.2.
+Infine sul campo descrizione viene utilizzato un GlobalMaxPooling1D per il sotto campionamento in una rappresentazione più compatta.
+Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE vengono utilizzati i pesi pretrainati), successivamente è stato utilizzato un layer di LSTM Bidirezionale con 12 celle e un fattore di dropout di 0.2; infine è stato utilizzato anche qui il GlobalMaxPooling1D.
+Sulle variabili categoriche non sono state effettuate altre operazioni.
+I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
 
-performance gain delle lstm??
-perchè non abbiamo provato le gru?
 
 
 
