@@ -169,6 +169,13 @@ Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
 	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
 \end{itemize}
 \subsubsection{Transformers}
+% \cite{vaswani2017attention}
+% diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
+Il Transformer è un'architettura proposta nel 2017 che si contrappone alle RNN
+evitando quindi la ricorrenza e utilizzando esclusivamente un meccanismo di
+\textit{attention} per rappresentare i rapporti di dipendenza di input e output.
+% corretto?
+
 \subsection{modello}\label{Modello}
 Nella realizzazione di questo progetto sono stati utilizzati due modelli principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi i modelli condividono la seguente struttura:
 \begin{itemize}
