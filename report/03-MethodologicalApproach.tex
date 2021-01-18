@@ -197,6 +197,7 @@ Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE 
 Sulle variabili categoriche non sono state effettuate altre operazioni.
 I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
 
+Nel modello sono stati utilizzati layers di RNN per trattare i dati non strutturati, poiché sono ottimi per l'elaborazione di dati sequenziali e nei testi per assegnare un'interpretazione corretta la relazione delle parole è molto importante. Infatti, le RNN elaborano una sequenza di input un elemento alla volta, mantenendo in "memoria" informazioni sugli elementi passati della sequenza \cite{liang2017text}.
 
 
 
