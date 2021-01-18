@@ -168,13 +168,6 @@ Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
 	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un vocabolario di 400 mila parole;
 	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
 \end{itemize}
-\subsubsection{Transformers}
-% \cite{vaswani2017attention}
-% diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
-Il Transformer è un'architettura proposta nel 2017 che si contrappone alle RNN
-evitando quindi la ricorrenza e utilizzando esclusivamente un meccanismo di
-\textit{attention} per rappresentare i rapporti di dipendenza di input e output.
-% corretto?
 
 \subsection{modello}\label{Modello}
 Nella realizzazione di questo progetto sono stati utilizzati due modelli principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi i modelli condividono la seguente struttura:
@@ -197,7 +190,34 @@ Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE 
 Sulle variabili categoriche non sono state effettuate altre operazioni.
 I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
 
-Nel modello sono stati utilizzati layers di RNN per trattare i dati non strutturati, poiché sono ottimi per l'elaborazione di dati sequenziali e nei testi per assegnare un'interpretazione corretta la relazione delle parole è molto importante. Infatti, le RNN elaborano una sequenza di input un elemento alla volta, mantenendo in "memoria" informazioni sugli elementi passati della sequenza \cite{liang2017text}.
+Nel modello sono stati utilizzati layers di RNN per trattare i dati non
+strutturati, poiché sono ottimi per l'elaborazione di dati sequenziali e nei
+testi per assegnare un'interpretazione corretta la relazione delle parole è
+molto importante. Infatti, le RNN elaborano una sequenza di input un elemento
+alla volta, mantenendo in "memoria" informazioni sugli elementi passati della
+sequenza \cite{liang2017text}.
+
+\subsubsection{Transformers}
+% diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
+Il Transformer è un'architettura proposta nel 2017 che si contrappone alle RNN
+evitando quindi la ricorrenza e utilizzando esclusivamente un meccanismo di
+\textit{attention} per rappresentare i rapporti di dipendenza di input e output.
+Si basa su di una struttura \textit{encoder-decoder} dove l'encoder fornisce al
+decoder una rappresentazione dell'input ed in seguito il decoder fornisce una
+frase in output \cite{vaswani2017attention}.
+
+% BERT’s model architecture is a multi-layer bidirectional Transformer encoder
+% based on the original implementation
+
+Una delle più note architetture basata sul concetto di Transformer è
+\textbf{BERT}, ovvero \textit{Bidirectional Encoder Representations from
+Transformers}; si tratta di un transformer multi-layer bidirezionale, cioè in
+grado di apprendere relazioni di dipendenza di un dato elemento dell'input sia
+rispetto agli input precedenti che ai successivi, che si basa esclusivamente su
+di moduli encoder. È stato introdotto con al fine di fornire un modello
+pre-allenato semplicemente adattabile ad un vasto range di applicazioni tramite
+\textit{fine-tuning}. Tuttavia anche gli approcci \textit{feature-based} basati
+su BERT risultano efficaci \cite{devlin2018bert}.
 
 
 
