@@ -1,15 +1,26 @@
-The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures.
-\subsection{Risultati clean}
-\subsection{Risultati raw}
+% The Results section is dedicated to presenting the actual results (i.e. measured and calculated quantities), not to discussing their meaning or interpretation. The results should be summarized using appropriate Tables and Figures (graphs or schematics). Every Figure and Table should have a legend that describes concisely what is contained or shown. Figure legends go below the figure, table legends above the table. Throughout the report, but especially in this section, pay attention to reporting numbers with an appropriate number of significant figures.
+% \subsection{Risultati clean}
+% \subsection{Risultati raw}
 
-\subsubsection{clean o raw}
-abbiamo valutato clean e raw; quali modelli beneficiano del cleanup, quali no?
-perchè? il deep learning impara meglio se il testo è raw?
+% \subsubsection{clean o raw}
+% abbiamo valutato clean e raw; quali modelli beneficiano del cleanup, quali no?
+% perchè? il deep learning impara meglio se il testo è raw?
 
 
-\begin{itemize}
-    \item bag of word based models: count vectorizer - tf/idf
-    \item embeddings: keras, glove pretrained. dire perchè non abbiamo provato
-    qualcosa tipo word2vec?
-    \item transformers con fine tuning
-\end{itemize} 
+% \begin{itemize}
+%     \item bag of word based models: count vectorizer - tf/idf
+%     \item embeddings: keras, glove pretrained. dire perchè non abbiamo provato
+%     qualcosa tipo word2vec?
+%     \item transformers con fine tuning
+% \end{itemize} 
+
+\subsection{Transformers}
+
+% todo: l'ho scritto nel 03. andrà modificato un po'.
+% necessario aggiungere performance
+Non è stato purtroppo possibile per motivazioni computazionali allenare questo
+modello sulla totalità del dataset ma è le limitazioni delle risorse di Google
+Colab hanno reso obbligata la scelta di utilizzare una piccola porzione del
+dataset per il training. Tuttavia i risultati sul validation sono
+particolarmente buoni considerando la ridotta quantità di esempi di training a
+disposizione rispetto ai modelli precedenti.
