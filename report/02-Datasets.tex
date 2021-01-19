@@ -33,22 +33,63 @@ esame, è vero il contrario.
 Infatti il prezzo medio dei prodotti spediti a carico degli acquirenti, circa
 \$30, è superiore a quello dei prodotti restanti, circa \$22.
 
-% spese di spedizione sono incluse nel prezzo?
+% spese di spedizione sono incluse nel prezzo? todo
 
 \subsubsection{Item condition}
-\textbf{Item\_condition\_id} rappresenta lo stato del prodotto, questo valore varia da 1 a 5.
-Il valore più frequente è 1, mentre 4 e 5 sono i più rari. Nei dati non è presente una descrizione dettagliata sul significato di questi valori, analizzando il dataset si può supporre che il valore 1 identifichi la condizione migliore poichè è la più frequente, mentre il valore 5 la condizione peggiore. Tuttavia calcolando i prezzi medi di vendita per ogni condizione non si riesce ad arrivare a una conclusione sicura poichè la condizione 5 è quella con il prezzo medio più alto, mentre la condizione 4 è quella con il prezzo medio più basso e le restanti categorie presentano un prezzo medio molto vicino.
+\textbf{Item\_condition\_id} rappresenta lo stato del prodotto; questo valore
+varia da 1 a 5. Il valore più frequente è 1, mentre 4 e 5 sono i più rari. La
+Kaggle challenge non ne fornisce una descrizione dettagliata sul significato. Si
+può supporre che il valore 1, il più frequente, identifichi la condizione
+migliore, mentre il valore 5 la condizione peggiore. Tuttavia, alla luce dei
+prezzi medi per ogni condizione, la supposizione sembra essere errata: i
+prodotti in condizione 5 hanno mediamente il prezzo maggiore, quelli in
+condizione 4, invece, il prezzo minore; infine la differenza nel prezzo medio
+degli articoli nelle condizioni 1,2 e 3 risulta molto lieve.
 \subsubsection{Category Name}
-\textbf{Category\_name} rappresenta la categoria di prodotto a cui appartiene l'articolo.
-Nel dataset sono presenti 1287 categorie univoche e tra ognuna di esse si vede una categoria principale/generale, seguita da due o più sottocategorie più specifiche (ad esempio: Women/Tops \& Blouses/T-Shirts). Inoltre, ci sono 6327 articoli che non hanno una categoria assegnata.
-Infine, analizzando le dieci categorie più popolari, si nota che l'abbigliamento femminile è molto popolare su Mercari. Infatti, di queste prime dieci categorie 5 sono di abbigliamento femminile; Anche il trucco e l'elettronica sono categorie molto quotate.
+\textbf{Category\_name}
+% todo dire che abbiamo splittato in 3 le categorie
+
+rappresenta la categoria di prodotto a cui appartiene l'articolo. Nel dataset
+sono presenti 1287 categorie univoche e tra ognuna di esse si vede una categoria
+principale/generale, seguita da due o più sottocategorie più specifiche (ad
+esempio: Women/Tops \& Blouses/T-Shirts). Inoltre, ci sono 6327 articoli che non
+hanno una categoria assegnata. Infine, analizzando le dieci categorie più
+popolari, si nota che l'abbigliamento femminile è molto popolare su Mercari.
+Infatti, di queste prime dieci categorie 5 sono di abbigliamento femminile;
+Anche il trucco e l'elettronica sono categorie molto quotate.
+
+
+rappresenta la categoria di prodotto a cui appartiene l'articolo. Nel dataset
+sono presenti 1287 categorie univoche, ad esempio \textit{"Women/Tops \&
+Blouses/T-Shirts"}, ed è facilmente osservabile una sorta di gerarchia di
+sottocategorie dalla più generica alla più specifica.
+
+Inoltre, circa 6000 articoli non hanno nessuna categoria assegnata, mentre analizzando categorie più numerose, si nota come l'abbigliamento
+femminile sia molto popolare su Mercari; 5 categarie nelle top 10 sono infatti
+di abbigliamento femminile. Trucco ed elettronica ricoprono anch'essi posizioni
+rilevanti tra le categorie più quotate.
 \subsubsection{Brand Name}
-\textbf{Brand\_name} rappresenta il marchio dell'articolo; nel dataset sono presenti 4809 valori differenti e 632682 valori mancanti.
+\textbf{Brand\_name} rappresenta il marchio dell'articolo; nel dataset sono
+presenti 4809 valori differenti e più di 600 mila valori mancanti che
+corrispondono a poco meno della metà dei prodotti totali.
 \subsubsection{Item Description}
-\textbf{Item\_description} rappresenta la descrizione del prodotto sotto forma di dato non strutturato. Nel dataset sono presenti 4 istanze senza descrizione e 82494 descrizioni con la stringa "no description yet".
-Inoltre, non esiste una correlazione tra la lunghezza delle descrizioni e il prezzo, in quanto c'è una correlazione di 0.048.
-Analizzando le word cloud ottenute tramite i bigrammi delle descrizioni  dei prodotti suddivisi in quattro fasce di prezzo: prezzo $>=$100 (Figura \ref{fig:100}), 50$<$ prezzo $<$100 (Figura \ref{Fig:50_100}), 30$<$ prezzo $<=$50 (Figura \ref{fig:30_50}) e prezzo $<=30$ (Figura \ref{Fig:minore_30}); si riescono a notare delle differenze sulle parole più frequenti. Infatti, nella wordcloud di Figura \ref{fig:100} sono molto frequenti bigrammi che danno informazioni sulle buone condizioni dei prodotti, ad esempio:  100 authentic, great condition e good condition.
-Diminuendo di prezzo questi bigrammi diventano meno frequenti, ma aumentano i bigrammi relativi a descrizioni mancanti.
+\textbf{Item\_description} rappresenta la descrizione del prodotto sotto forma
+di dato non strutturato. Nel dataset sono presenti 4 istanze senza descrizione e
+circa 82 mila con la stringa "no description yet".
+Inoltre, non sembra esistere una relazione lineare tra lunghezza delle
+descrizioni e prezzo, in quanto l'indice di correlazione di Pearson è prossimo a
+zero; 0.048 per l'esattezza.
+
+Analizzando le word cloud ottenute dai bigrammi delle descrizioni dopo aver
+suddiviso i prodotti in quattro fasce di prezzo (figure \ref{fig:100},
+\ref{Fig:50_100}, \ref{fig:30_50} e \ref{Fig:minore_30}) si riescono a notare delle differenze sulle coppie parole più frequenti, identificabili perchè
+di dimensioni più grandi.
+
+Infatti, nella wordcloud dei prodotti con prezzo superiore a \$100 (Figura
+\ref{fig:100}) sono molto frequenti bigrammi che danno informazioni sulle buone
+condizioni dei prodotti, ad esempio:  100 authentic, great condition e good
+condition. Al diminuire del prezzo questi bigrammi diventano meno frequenti;
+aumentano invece i bigrammi relativi a descrizioni mancanti.
 
 \begin{figure}[H]
    \begin{minipage}{0.48\textwidth}
