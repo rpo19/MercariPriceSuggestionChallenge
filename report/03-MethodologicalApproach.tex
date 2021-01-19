@@ -43,27 +43,17 @@ Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle challenge
 per confrontare le performance dei vari partecipanti. Inoltre essa risulta
 adeguata al problema considerando il vasto intervallo dei valori dei prezzi.
 
-Di seguito la definizione e alcune osservazioni su di RMSLE insieme alle
-ulteriori metriche utilizzate; ad esempio il \textit{Mean Absolute Error (MAE)},
+Di seguito la definizione e alcune osservazioni su di RMSLE e su un'ulteriore
+metrica utilizzata, il \textit{Mean Absolute Error (MAE)},
 che fornisce una più immediata comprensione rispetto al RMSLE. \\
 Mean Absolute Error (MAE):
 \begin{equation}
     \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
 \end{equation}
 \\
-Mean Squared Error (MSE):
-\begin{equation}
-    \frac{1}{n} \sum_{i=1}^{n} ( y_i - \hat{y_i} )^2
-\end{equation}
-Il quadrato fornisce un peso maggiore agli errori dei valori più elevati\cite{rmse-or-mae}.
-\\
-Root Mean Squared Error (RMSE):
-\begin{equation}
-    \sqrt{ \frac{1}{n} \sum_{i=1}^{n} ( y_i - \hat{y_i} )^2}
-\end{equation}
-La radice dell'MSE, nella stessa scala dei valori.
-\\
-Mean Squared Logarithmic Error (MSLE):
+Mean Squared Logarithmic Error (MSLE): essendo calcolato a partire da un
+rapporto riflette l'errore relativo e di conseguenza risulta efficace laddove i
+valore assoluti presentano variazioni considerevoli.
 \begin{equation}
     \frac{1}{n}
         \sum_{i=1}^{n}
@@ -73,10 +63,8 @@ Mean Squared Logarithmic Error (MSLE):
         \sum_{i=1}^{n}
             \log^2(\frac{y_i+1}{\hat{y_i}+1})
 \end{equation}
-Essendo calcolato a partire da un rapporto riflette l'errore relativo e di
-conseguenza risulta efficace laddove i valore assoluti presentano variazioni considerevoli.
 \\
-Root Mean Squared Logarithmic Error (RMSLE):
+Root Mean Squared Logarithmic Error (RMSLE): la radice dell'MSLE.
 \begin{equation}
     \sqrt{ 
         \frac{1}{n}
@@ -84,7 +72,6 @@ Root Mean Squared Logarithmic Error (RMSLE):
                 ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
     }
 \end{equation}
-La radice dell'MSLE.
 
 % dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
 % dai vari approcci
@@ -100,14 +87,14 @@ al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
 
 Inizialmente sono state valutate le performance di regressione dei prezzi a
 partire dalle sole features categoriche in modo tale da stabilire un punto di
-partenza per la successiva analisi delle features testuali \textit{name} e
+partenza per la successiva analisi delle features testuali, \textit{name} e
 \textit{item\_description}, più complesse e computazionalmente costose.
 
-Un semplice modello composto da due layer Densi è stato sufficiente a
-raggiungere le seguenti performance alla fine della decima epoca con l'aiuto di
-un layer Dropout interposto ad essi per contrastare l'overfitting.
+È stato utilizzato un semplice modello composto da due layer Densi con un layer
+Dropout interposto per contrastare l'overfitting.
 
-% todo: qui mettere le performance
+% todo: mettere le performance nella sezione dopo
+% todo: immagine del modello
 
 % parlare di quanto tempo richiedono le 10 epoche.
 % del numero dei parametri del modello.
@@ -118,59 +105,92 @@ un layer Dropout interposto ad essi per contrastare l'overfitting.
 \subsection{Rappresentazione del Testo}
 
 \subsubsection{Bag of Words}
-Il modello bag-of-words è una rappresentazione semplificata  di testi, dove
-ciascuno di essi è rappresentato come una "borsa" (vettore) delle sue parole.
-Quindi crea un vettore per ogni documento contenete il conteggio delle
-occorrenze di ciascuna parola del vocabolario nel documento. Questa tecnica
-ignora la grammatica e persino l'ordine delle parole, ma mantiene la
-molteplicità \cite{manning_raghavan_schutze_2008}.
-\subsubsection{Tf-Idf}\label{section-tfidf}
-Tf-Idf (Term frequency-Inverse document frequency) \cite{manning_raghavan_schutze_2008} risolve uno dei principali problemi che si hanno con Bag of Words, poiché quest'ultima tecnica non considera relazioni tra i vari documenti. Infatti, Tf-Idf \eqref{eq:tf-idf} considera l'importanza di una parola per un documento in una collezione di documenti (corpus).
-Il vettore costruito per ogni documento tramite questa tecnica considera per ciascun termine del documento la frequenza con cui il termine compare in questo documento (Term Frequency, TF \eqref{eq:tf}) rispetto alla frequenza del termine in tutti i documenti (Inverse Document Frequency, IDF \eqref{eq:idf}).
+% todo: dire qualcosa della dimensionalità di bow e tf idf?
+Il modello bag-of-words è una semplice rappresentazione di testi, dove ciascuno
+di essi è rappresentato come una "borsa" di parole; viene creato un vettore per
+ogni documento che contiene il numero di occorrenze di ciascuna parola del
+vocabolario nel documento. Questa tecnica ignora la grammatica e persino
+l'ordine delle parole \cite{manning_raghavan_schutze_2008}.
+
+\subsubsection{Tf-Idf}\label{section-tfidf} Tf-Idf (Term frequency-Inverse
+document frequency) \cite{manning_raghavan_schutze_2008}, al contrario di Bag of
+Words, considera l'importanza di una parola rispetto ad un documento alla luce
+dell'importanza della stessa nell'intera collezione di documenti utilizzando la
+frequenza in cui il termine compare prime nel documento e poi nella collezione
+come mostrano le formule seguenti.% (corpus). ?
+% todo: va bene parlare di documenti? vogliamo addattare più al nostro dataset?
 
 \begin{equation}
 \label{eq:tf-idf}
    Tf-Idf_{t,d} = tf_{t,d} \cdot idf_t
-\end{equation}\\
+\end{equation}
+\\
 \begin{equation}
 \label{eq:tf}
-   tf_{t,d} = \frac{n_{t,d}}{number of terms in the document d} 
-\end{equation}\\
+   tf_{t,d} = \frac{n_{t,d}}{|d|} 
+\end{equation}
+\\
 \begin{equation}
 \label{eq:idf}
-   idf_{t} = \log \frac{number of documents}{number of documents with term t} 
+   idf_{t} = \log \frac{|D|}{|\{d: t \in d\}|} 
 \end{equation}
-Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine e d indica il documento.
-\\
+Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine, d
+indica il documento, D l'insieme dei documenti e le cardinalità di d e D si
+riferiscono rispettivamente al numero di termini e a quello di documenti.
+
+
+
+Per quanto riguarda il modello è stata sufficiente l'aggiunta un layer di
+concatenazione in testa così da renderlo capace di accettare anche gli input
+testuali nella forma di BoW.
+
+% abbiamo dovuto aumentare i parametri rispetto alle categoriche?
+
 \subsubsection{Word Embeddings}
 
-Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per molti tasks. Tuttavia queste tecniche semplici sono al limite in molti compiti perché trattano le parole come unità atomiche, senza alcuna correlazione poiché vengono rappresentate come indici di un vocabolario. 
-Con lo sviluppo delle tecniche di Machine Learning sono nati modelli in grado di
-apprendere rappresentazioni vettoriali di alta qualità di parole provenienti da
-set di dati composti da miliardi di parole e con vocabolari di milioni di
-parole.
+Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per
+numerosi task. Tuttavia sono poco performanti in alcune applicazioni poiché
+trattano le parole come unità atomiche, senza apprenderne relazioni complesse
+ad esempio di similarità o causalità.
+% nel senso che non si capisce se una parola è simile ad un altra e non si hanno
+% relazioni del tipo una parola segue sempre l'altra. todo: è giusto dire
+% causalità?
 
-Queste nuove tecniche prendono il nome di \textbf{word embeddings} e
-consentono di rappresentare parole per mezzo di vettori densi e di lunghezza
-fissa \cite{almeida2019word}, fornendo di conseguenza una rappresentazione più
-efficiente rispetto alla \textit{Bag of words} sparsa e dimensionalmente più
-costosa.
+Con lo sviluppo delle tecniche di Machine Learning si sono diffusi i cosiddetti
+\textit{word embedding} che consentono di rappresentare parole per mezzo di
+vettori densi e di lunghezza fissa \cite{almeida2019word}, fornendo di
+conseguenza una rappresentazione più efficiente rispetto alla \textit{Bag of
+words} sparsa e dimensionalmente più costosa.
+% todo: meglio dire prima che la bow è sparsa ?
 
-Inoltre questi vettori sono in grado di rispettare la similarità tra le parole
-considerando più gradi di somiglianza e rappresentando la regolarità semantica e
-sintattica, permettendo anche operazioni algebriche \cite{mikolov2013efficient}.
+Inoltre questi vettori sono in grado di apprendere la similarità tra parole così
+come regole semantiche o sintattiche, permettendo anche operazioni algebriche
+\cite{mikolov2013efficient}.
+% dobbiamo sapere cosa significa semantico e sintattico
+
+% word embedding di keras
+
+% Nel modello è stata utilizzata l'implementazione di word embedding fornita da
+% Keras sotto forma di layer. La sua dimensionalità è stata impostata a 50 e to
+% be continued
 
 
 \subsubsection{GLOVE}
-GLOVE \cite{pennington2014glove} è un algoritmo di apprendimento non supervisionato che fornisce una rappresentazione vettoriale di ogni parola, considerando le statistiche globali di ricorrenza parola per parola (word-word ??????) da un corpus e le rappresentazioni ottenute mostrano sottostrutture lineari dello spazio vettoriale delle parole. Inoltre, gli ideatori di questa tecnica hanno reso disponibile i word embeddings pre-addestrati.
-Nel dettaglio in questo lavoro sono stati utilizzati i seguenti embeddings:
+GLOVE (Global Vectors) è un modello di apprendimento non supervisionato allenato
+a partire dalle statistiche globali di co-occorrenza delle varie parole
+\cite{pennington2014glove}. Sono inoltre disponibili modelli GLOVE
+pre-addestrati; seguono quelli utilizzati nel progetto.
 \begin{itemize}
-	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un vocabolario di 400 mila parole;
-	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario di 2.2 milioni di parole (il più grande disponibile di GLOVE);
+	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un
+	vocabolario di 400 mila parole;
+	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario
+	di 2.2 milioni di parole (il più grande tra i modelli GLOVE pre-addrestrati);
 \end{itemize}
 
 \subsection{modello}\label{Modello}
-Nella realizzazione di questo progetto sono stati utilizzati due modelli principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi i modelli condividono la seguente struttura:
+Nella realizzazione di questo progetto sono stati utilizzati due modelli
+principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi
+i modelli condividono la seguente struttura:
 \begin{itemize}
 	\item \textbf{Concatenate layer}: concatena gli input in un singolo tensore;
 	\item \textbf{Dropout layer}: per escludere una frazione dell'input e il fattore utilizzato è 0.2;
@@ -180,15 +200,30 @@ Nella realizzazione di questo progetto sono stati utilizzati due modelli princip
 	\item \textbf{Dense layer}: rappresenta il layer di output ed è composto da un neurone con funzione di attivazione lineare poiché il task è una regressione;
 \end{itemize}
 \subsubsection{Word Embeddins}
-Il modello principale utilizzato per i Word Embeddings (sia pretrainati che non) tratta i seguenti input differentemente: descrizione del prodotto, variabili categoriche del prodotto (nome, categorie, brand, shipping e condizione) e nome del prodotto.
-La descrizione e il nome vengono rappresentati sotto forma di interi, dove ogni intero rappresenta l'indice di un token in un dizionario.
-Le variabili categoriche che non prevedevano un valore intero sono state convertite in valori interi.
-La descrizione prevede un layer di embedding, il quale crea la rappresentazione vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono apprendibili in quanto vengono utilizzati quelli pretrainati.
-Successivamente sono stati utilizzati due layer LSTM Bidirezionali per trattare questo input e il primo layer prevede 16 celle LSTM e un fattore di dropout di 0.2, mentre il secondo prevede 8 celle LSTM e anch'esso utilizza un fattore di dropout di 0.2.
-Infine sul campo descrizione viene utilizzato un GlobalMaxPooling1D per il sotto campionamento in una rappresentazione più compatta.
-Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE vengono utilizzati i pesi pretrainati), successivamente è stato utilizzato un layer di LSTM Bidirezionale con 12 celle e un fattore di dropout di 0.2; infine è stato utilizzato anche qui il GlobalMaxPooling1D.
+Il modello principale utilizzato per i Word Embeddings (sia pretrainati che non)
+tratta i seguenti input differentemente: descrizione del prodotto, variabili
+categoriche del prodotto (nome, categorie, brand, shipping e condizione) e nome
+del prodotto.
+La descrizione e il nome vengono rappresentati sotto forma di interi, dove ogni
+intero rappresenta l'indice di un token in un dizionario.
+Le variabili categoriche che non prevedevano un valore intero sono state
+convertite in valori interi.
+La descrizione prevede un layer di embedding, il quale crea la rappresentazione
+vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono
+apprendibili in quanto vengono utilizzati quelli pretrainati.
+Successivamente sono stati utilizzati due layer LSTM Bidirezionali per trattare
+questo input e il primo layer prevede 16 celle LSTM e un fattore di dropout di
+0.2, mentre il secondo prevede 8 celle LSTM e anch'esso utilizza un fattore di
+dropout di 0.2.
+Infine sul campo descrizione viene utilizzato un GlobalMaxPooling1D per il sotto
+campionamento in una rappresentazione più compatta.
+Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE
+vengono utilizzati i pesi pretrainati), successivamente è stato utilizzato un
+layer di LSTM Bidirezionale con 12 celle e un fattore di dropout di 0.2; infine
+è stato utilizzato anche qui il GlobalMaxPooling1D.
 Sulle variabili categoriche non sono state effettuate altre operazioni.
-I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
+I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi
+nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
 
 Nel modello sono stati utilizzati layers di RNN per trattare i dati non
 strutturati, poiché sono ottimi per l'elaborazione di dati sequenziali e nei
