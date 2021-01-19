@@ -183,7 +183,7 @@ Nella realizzazione di questo progetto sono stati utilizzati due modelli princip
 Il modello principale utilizzato per i Word Embeddings (sia pretrainati che non) tratta i seguenti input differentemente: descrizione del prodotto, variabili categoriche del prodotto (nome, categorie, brand, shipping e condizione) e nome del prodotto.
 La descrizione e il nome vengono rappresentati sotto forma di interi, dove ogni intero rappresenta l'indice di un token in un dizionario.
 Le variabili categoriche che non prevedevano un valore intero sono state convertite in valori interi.
-La descrizione prevede un layer di embedding, il quale crea la rappresentazione vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono apprendibili in quanto utilizziamo quelli pretrainati.
+La descrizione prevede un layer di embedding, il quale crea la rappresentazione vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono apprendibili in quanto vengono utilizzati quelli pretrainati.
 Successivamente sono stati utilizzati due layer LSTM Bidirezionali per trattare questo input e il primo layer prevede 16 celle LSTM e un fattore di dropout di 0.2, mentre il secondo prevede 8 celle LSTM e anch'esso utilizza un fattore di dropout di 0.2.
 Infine sul campo descrizione viene utilizzato un GlobalMaxPooling1D per il sotto campionamento in una rappresentazione più compatta.
 Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE vengono utilizzati i pesi pretrainati), successivamente è stato utilizzato un layer di LSTM Bidirezionale con 12 celle e un fattore di dropout di 0.2; infine è stato utilizzato anche qui il GlobalMaxPooling1D.
@@ -214,10 +214,18 @@ Una delle più note architetture basata sul concetto di Transformer è
 Transformers}; si tratta di un transformer multi-layer bidirezionale, cioè in
 grado di apprendere relazioni di dipendenza di un dato elemento dell'input sia
 rispetto agli input precedenti che ai successivi, che si basa esclusivamente su
-di moduli encoder. È stato introdotto con al fine di fornire un modello
+di moduli encoder. È stato introdotto con il fine di fornire un modello
 pre-allenato semplicemente adattabile ad un vasto range di applicazioni tramite
 \textit{fine-tuning}. Tuttavia anche gli approcci \textit{feature-based} basati
 su BERT risultano efficaci \cite{devlin2018bert}.
+
+In questo progetto BERT è stato utilizzato con quest'ultimo approccio
+feature-based occupando effettivamente nel modello la stessa posizione dedicata
+agli embedding per entrambi i campi nome e descrizione; il resto del modello è
+pressochè invariato rispetto a quello precedentemente descritto, ovvero a
+seguito di BERT troviamo fino a due layer LSTM bidirezionali (uno per il nome),
+un GlobalMaxPooling1D e gli ultimi due layer Densi entrambi preceduti da un
+dropout.
 
 
 
