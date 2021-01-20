@@ -44,6 +44,19 @@ partenza per la successiva analisi delle features testuali, \textit{name} e
 
 È stato utilizzato un semplice modello composto da due layer Densi con un layer
 Dropout interposto per contrastare l'overfitting.
+Questo modello verrà in seguito ampliato per utilizzare anche le feature
+testuali a seconda dei vari approcci.
+La figura \ref{fig:modeltemplate} ne mostra un template.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[
+		height=8cm,
+		keepaspectratio,
+	]{modelTemplate.png}
+	\caption{Template del modello}
+	\label{fig:modeltemplate}
+\end{figure}
 
 % todo: mettere le performance nella sezione dopo
 % todo: immagine del modello
@@ -270,4 +283,6 @@ al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
 \textit{Google Colab} abilitando l'accelerazione hardware GPU.
 
 
+\subsection{TODO}
 
+adam, earlystopping, batchsize, learning rate.
