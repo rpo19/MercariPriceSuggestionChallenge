@@ -23,17 +23,6 @@
 % system and how and to what extent you overcame them. Common problems are:
 % difficulties involving existing software.
 
-% todo meglio metterla qui l'analisi del dataset? media, std,... usate dalla normale
-\subsubsection{Training e valutazione}
-
-\subsubsection{Dataset split}
-
-Al fine di valutare i vari modelli più correttamente possibile il dataset è
-stato suddiviso in \textit{training-set}, \textit{validation-set} e
-\textit{test-set}. Quindi il training è stato usato per l'allenamento, il
-validation per accertarsi che il modello non sia propenso all'overfitting ed il
-test per la valutazione finale.
-
 \subsection{Categoriche}
 \textbf{Dire qualcosa sulle categoriche}
 
@@ -233,6 +222,16 @@ pressochè invariato rispetto a quello precedentemente descritto, ovvero a
 seguito di BERT troviamo fino a due layer LSTM bidirezionali (uno per il nome),
 un GlobalMaxPooling1D e gli ultimi due layer Densi entrambi preceduti da un
 dropout.
+
+\subsubsection{Training e valutazione}
+
+\subsubsection{Dataset split}
+
+Al fine di valutare i vari modelli più correttamente possibile il dataset è
+stato suddiviso in \textit{training-set}, \textit{validation-set} e
+\textit{test-set}. Quindi il training è stato usato per l'allenamento, il
+validation per accertarsi che il modello non sia propenso all'overfitting ed il
+test per la valutazione finale.
 
 \subsubsection{Valutazione dell'errore}
 % loss e metriche
