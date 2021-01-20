@@ -1,0 +1,17 @@
+non sicuro; rimasto output nel notebook
+
+Total params: 6,678,049
+Trainable params: 6,678,049
+Non-trainable params: 0
+
+un'epoca dura  247s 68ms/step
+
+test:
+
+9043/9043 [==============================] - 65s 7ms/step - loss: 0.4492 - mse: 811.4613 - mae: 10.5615 - root_mean_squared_error: 28.4862 - mean_squared_logarithmic_error: 0.2082 - root_mean_squared_logarithmic_error: 0.4492
+{'loss': 0.4479307234287262,
+ 'mae': 10.684135437011719,
+ 'mean_squared_logarithmic_error': 0.20695917308330536,
+ 'mse': 847.1179809570312,
+ 'root_mean_squared_error': 29.10529136657715,
+ 'root_mean_squared_logarithmic_error': 0.4479252099990845}
