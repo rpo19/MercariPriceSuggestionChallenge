@@ -76,18 +76,12 @@ testuali sono forniti in input direttamente al primo layer denso allo stesso
 modo delle variabili categoriche.
 
 \subsubsection{Tf-Idf}\label{section-tfidf} Tf-Idf (Term frequency-Inverse
-document frequency) \cite{manning_raghavan_schutze_2008}, al contrario di Bag of
-Words, considera l'importanza di una parola rispetto ad un documento alla luce
-dell'importanza della stessa nell'intera collezione di documenti utilizzando la
-frequenza in cui il termine compare prime nel documento e poi nella collezione
-come mostrano le formule seguenti.% (corpus). ?
+document frequency) \cite{manning_raghavan_schutze_2008} è una misura volta a
+rappresentare l'importanza di una parola rispetto al documento che la contiene alla luce
+dell'importanza della stessa nell'intera collezione di documenti; segue la
+definizione.% (corpus). ?
 % todo: va bene parlare di documenti? vogliamo addattare più al nostro dataset?
 
-\begin{equation}
-\label{eq:tf-idf}
-   Tf-Idf_{t,d} = tf_{t,d} \cdot idf_t
-\end{equation}
-\\
 \begin{equation}
 \label{eq:tf}
    tf_{t,d} = \frac{n_{t,d}}{|d|} 
@@ -97,15 +91,25 @@ come mostrano le formule seguenti.% (corpus). ?
 \label{eq:idf}
    idf_{t} = \log \frac{|D|}{|\{d: t \in d\}|} 
 \end{equation}
-Dove in \eqref{eq:tf-idf}\eqref{eq:tf}\eqref{eq:idf} t indica il termine, d
-indica il documento, D l'insieme dei documenti e le cardinalità di d e D si
-riferiscono rispettivamente al numero di termini e a quello di documenti.
+\\
+\begin{equation}
+\label{eq:tf-idf}
+    Tf\mbox{-}Idf_{t,d} = tf_{t,d} \cdot idf_t
+\end{equation}
 
+Dove $t$ indica il termine, $d$
+indica il documento, $n_{t,d}$ la frequenza assoluta di t in d, $D$ l'insieme
+dei documenti, $|d|$ il numero di termini in $d$ e $|D|$ il numero di documenti.
 
+Per Tf-Idf come approccio di rappresentazione del testo si vuole indendere un
+approccio Bag of Word i cui vettori anzichè contenere semplicemente il numero di
+occorrenze della parola corrispondente nel documento ne contengono il valore
+Tf-Idf.
 
-Per quanto riguarda il modello è stata sufficiente l'aggiunta un layer di
-concatenazione in testa così da renderlo capace di accettare anche gli input
-testuali nella forma di BoW.
+Perciò, anche per quanto riguarda il modello è stato utilizzato allo stesso modo
+che con Bag of Words. 
+
+% todo dobbiamo parlare del layer di concatenazione?
 
 % abbiamo dovuto aumentare i parametri rispetto alle categoriche?
 
