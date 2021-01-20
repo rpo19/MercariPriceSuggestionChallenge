@@ -37,15 +37,15 @@ Questo modello verrà in seguito ampliato per utilizzare anche le feature
 testuali a seconda dei vari approcci.
 La figura \ref{fig:modeltemplate} ne mostra un template.
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[
-		height=8cm,
-		keepaspectratio,
-	]{modelTemplate.png}
-	\caption{Template del modello}
-	\label{fig:modeltemplate}
-\end{figure}
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \includegraphics[
+        height=6cm,
+        keepaspectratio
+    ]{modelTemplate}
+    \caption{Template del modello}
+    \label{fig:modeltemplate}
+\end{wrapfigure}
 
 % todo: mettere le performance nella sezione dopo
 % todo: immagine del modello
@@ -171,15 +171,15 @@ denso come mostrato nel template.
 
 % todo conv
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[
-		height=6cm,
-		keepaspectratio,
-	]{kerasModel.png}
-	\caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali usanti tanh come funzione d'attivazione e dropout.}
-	\label{fig:kerasModel}
-\end{figure}
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \includegraphics[
+        height=6cm,
+        keepaspectratio
+    ]{kerasModel}
+    \caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali usanti tanh come funzione d'attivazione e dropout.}
+    \label{fig:kerasModel}
+\end{wrapfigure}
 
 % Nel modello è stata utilizzata l'implementazione di word embedding fornita da
 % Keras sotto forma di layer. La sua dimensionalità è stata impostata a 50 e to
@@ -191,10 +191,10 @@ a partire dalle statistiche globali di co-occorrenza delle varie parole
 \cite{pennington2014glove}. Sono inoltre disponibili modelli GLOVE
 pre-addestrati; seguono quelli utilizzati nel progetto.
 \begin{itemize}
-	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un
-	vocabolario di 400 mila parole;
-	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario
-	di 2.2 milioni di parole (il più grande tra i modelli GLOVE pre-addrestrati);
+    \item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un
+    vocabolario di 400 mila parole;
+    \item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario
+    di 2.2 milioni di parole (il più grande tra i modelli GLOVE pre-addrestrati);
 \end{itemize}
 
 % todo modello glove embedding keras trainable false
