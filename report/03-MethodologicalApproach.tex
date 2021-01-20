@@ -66,10 +66,10 @@ di essi è rappresentato come una "borsa" di parole; per ogni "documento", in
 questo caso per ogni \textit{Name} o \textit{item\_description}, viene creato un
 vettore che contiene il numero di occorrenze di ciascuna parola del vocabolario
 nel documento; di conseguenza ognuno di questi vettori ha cardinalità pari alla
-dimensione del vocabolario e si tratta spesso di vettori sparsi in quanti gli elementi 
-che corrispondono a parole non sono presenti nel documento hanno valore 0.
-Regole grammaticali e l'ordine delle parole non sono rappresentabili tramite
-questa tecnica \cite{manning_raghavan_schutze_2008}.
+dimensione del vocabolario e si tratta generalmente di vettori sparsi in quanti
+gli elementi che corrispondono a parole non sono presenti nel documento hanno
+valore 0. Regole grammaticali e l'ordine delle parole non sono rappresentabili
+tramite questa tecnica \cite{manning_raghavan_schutze_2008}.
 
 Ritornando al modello, per quanto riguarda Bag of Words i vettori delle feature
 testuali sono forniti in input direttamente al primo layer denso allo stesso
@@ -102,9 +102,9 @@ indica il documento, $n_{t,d}$ la frequenza assoluta di t in d, $D$ l'insieme
 dei documenti, $|d|$ il numero di termini in $d$ e $|D|$ il numero di documenti.
 
 Per Tf-Idf come approccio di rappresentazione del testo si vuole indendere un
-approccio Bag of Word i cui vettori anzichè contenere semplicemente il numero di
+approccio simile a Bag of Word i cui vettori anzichè contenere semplicemente il numero di
 occorrenze della parola corrispondente nel documento ne contengono il valore
-Tf-Idf.
+Tf-Idf (\ref{eq:tf-idf}).
 
 Perciò, anche per quanto riguarda il modello è stato utilizzato allo stesso modo
 che con Bag of Words. 
@@ -133,20 +133,57 @@ words} sparsa e dimensionalmente più costosa.
 Inoltre questi vettori sono in grado di apprendere la similarità tra parole così
 come regole semantiche o sintattiche, permettendo anche operazioni algebriche
 \cite{mikolov2013efficient}.
-% dobbiamo sapere cosa significa semantico e sintattico
+% todo dobbiamo sapere cosa significa semantico e sintattico
 
 % word embedding di keras
 \subsubsection{Keras Embedding Layer}
 
-Keras fornisce un implementazione di embedding sotto la forma di layer neurale
-e ne rende quindi possibile l'addestramento insieme al resto del modello;
-altrimenti permette di fissare il valore dei pesi semplificando l'integrazione
-con modelli pre-allenati.
+Keras fornisce un implementazione di embedding sotto la forma di layer neurale e
+ne rende quindi possibile l'addestramento insieme al resto del modello.
+
+% % todo dire dopo questa cosa con glove
+% Offre inoltre la possibilità di fissare il valore dei pesi semplificando
+% l'integrazione con modelli pre-allenati.
+
+Ritornando al modello, è necessario codificare le frasi di input sotto forma di
+vettori di interi, a tal proposito keras fornisce la classe
+\textit{tf.keras.preprocessing.\-text.Tokenizer}, in seguito questi vettori sono
+aggiunti in input al modello. Tenendo come riferimento il template in figure
+\ref{fig:modeltemplate}, nella sezione che tratta il testo, precisamente in
+sostituzione al box "..." sono stati aggiunti due layer embedding, uno per
+\textit{Name} e uno per \textit{Item\_description}, seguiti da layer aggiuntivi
+al fine di sfruttare al meglio le informazioni degli embedding.
+
+In particolare sono stati utilizzati layer RNN per trattare i dati non
+strutturati, poiché risultano ottimi per l'elaborazione di dati sequenziali, come
+testo; ad esempio sono in grado di cogliere relazioni tra le parole di una stessa frase.
+
+Infatti, le RNN elaborano una sequenza di input un elemento
+alla volta, mantenendo in "memoria" informazioni sugli elementi passati della
+sequenza \cite{liang2017text}.
+
+Nello specifico sono stati considerati layer LSTM, GRU, LSTM bidirezionali di
+cui si parlerà più dettagliatamente in seguito.
+
+Infine l'output di questi layer è stato assegnato come input al primo layer
+denso come mostrato nel template.
+
+
+% todo conv
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[
+		height=6cm,
+		keepaspectratio,
+	]{kerasModel.png}
+	\caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali usanti tanh come funzione d'attivazione e dropout.}
+	\label{fig:kerasModel}
+\end{figure}
 
 % Nel modello è stata utilizzata l'implementazione di word embedding fornita da
 % Keras sotto forma di layer. La sua dimensionalità è stata impostata a 50 e to
-% be continued... todo dire ciò in qualche modo
-
+% be continued... todo dire ciò in qualche modo. magari nei risultati
 
 \subsubsection{GLOVE}
 GLOVE (Global Vectors) è un modello di apprendimento non supervisionato allenato
@@ -160,50 +197,10 @@ pre-addestrati; seguono quelli utilizzati nel progetto.
 	di 2.2 milioni di parole (il più grande tra i modelli GLOVE pre-addrestrati);
 \end{itemize}
 
-\subsection{modello}\label{Modello}
-Nella realizzazione di questo progetto sono stati utilizzati due modelli
-principali che trattano le tecniche di rappresentazione utilizzate ed  entrambi
-i modelli condividono la seguente struttura:
-\begin{itemize}
-	\item \textbf{Concatenate layer}: concatena gli input in un singolo tensore;
-	\item \textbf{Dropout layer}: per escludere una frazione dell'input e il fattore utilizzato è 0.2;
-	\item \textbf{Dense layer}: composto da 32 neuroni e come funzione di attivazione usa la Relu;
-	\item \textbf{Dropout layer}: utilizza un fattore di 0.2;
-	\item \textbf{Dense layer}: composto da 16 neuroni e come funzione di attivazione usa la Relu;
-	\item \textbf{Dense layer}: rappresenta il layer di output ed è composto da un neurone con funzione di attivazione lineare poiché il task è una regressione;
-\end{itemize}
-\subsubsection{Word Embeddins}
-Il modello principale utilizzato per i Word Embeddings (sia pretrainati che non)
-tratta i seguenti input differentemente: descrizione del prodotto, variabili
-categoriche del prodotto (nome, categorie, brand, shipping e condizione) e nome
-del prodotto.
-La descrizione e il nome vengono rappresentati sotto forma di interi, dove ogni
-intero rappresenta l'indice di un token in un dizionario.
-Le variabili categoriche che non prevedevano un valore intero sono state
-convertite in valori interi.
-La descrizione prevede un layer di embedding, il quale crea la rappresentazione
-vettoriale densa delle parole e nel caso di GLOVE i pesi utilizzati non sono
-apprendibili in quanto vengono utilizzati quelli pretrainati.
-Successivamente sono stati utilizzati due layer LSTM Bidirezionali per trattare
-questo input e il primo layer prevede 16 celle LSTM e un fattore di dropout di
-0.2, mentre il secondo prevede 8 celle LSTM e anch'esso utilizza un fattore di
-dropout di 0.2.
-Infine sul campo descrizione viene utilizzato un GlobalMaxPooling1D per il sotto
-campionamento in una rappresentazione più compatta.
-Anche il nome viene trattato tramite un layer di embedding (anche qui con GLOVE
-vengono utilizzati i pesi pretrainati), successivamente è stato utilizzato un
-layer di LSTM Bidirezionale con 12 celle e un fattore di dropout di 0.2; infine
-è stato utilizzato anche qui il GlobalMaxPooling1D.
-Sulle variabili categoriche non sono state effettuate altre operazioni.
-I tre nuovi input ottenuti vengono passati nel layer di concatenazione e quindi
-nella struttura spiegata precedentemente all'inizio della sezione \ref{Modello}.
-
-Nel modello sono stati utilizzati layers di RNN per trattare i dati non
-strutturati, poiché sono ottimi per l'elaborazione di dati sequenziali e nei
-testi per assegnare un'interpretazione corretta la relazione delle parole è
-molto importante. Infatti, le RNN elaborano una sequenza di input un elemento
-alla volta, mantenendo in "memoria" informazioni sugli elementi passati della
-sequenza \cite{liang2017text}.
+% todo modello glove embedding keras trainable false
+Utilizzando la stessa architettura del modello Keras sono stati assegnati i pesi
+preaddestrati ai layer Embedding e sono stati impostati come non-trainbili.
+% todo 50% copertura nei risultato
 
 \subsubsection{Transformers}
 % diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
@@ -287,6 +284,8 @@ Root Mean Squared Logarithmic Error (RMSLE): la radice dell'MSLE.
 % dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
 % dai vari approcci
 
+% todo numero parametri
+
 \subsubsection{Valutazione dei costi computazionali}
 
 Il numero dei parametri allenabili dei vari modelli sono stati annotati insieme
@@ -296,4 +295,4 @@ al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
 
 \subsection{TODO}
 
-adam, earlystopping, batchsize, learning rate.
+adam, earlystopping, batchsize, learning rate, numero parametri.
