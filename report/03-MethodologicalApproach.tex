@@ -62,10 +62,18 @@ La figura \ref{fig:modeltemplate} ne mostra un template.
 \subsubsection{Bag of Words}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
 Il modello bag-of-words è una semplice rappresentazione di testi, dove ciascuno
-di essi è rappresentato come una "borsa" di parole; viene creato un vettore per
-ogni documento che contiene il numero di occorrenze di ciascuna parola del
-vocabolario nel documento. Questa tecnica ignora la grammatica e persino
-l'ordine delle parole \cite{manning_raghavan_schutze_2008}.
+di essi è rappresentato come una "borsa" di parole; per ogni "documento", in
+questo caso per ogni \textit{Name} o \textit{item\_description}, viene creato un
+vettore che contiene il numero di occorrenze di ciascuna parola del vocabolario
+nel documento; di conseguenza ognuno di questi vettori ha cardinalità pari alla
+dimensione del vocabolario e si tratta spesso di vettori sparsi in quanti gli elementi 
+che corrispondono a parole non sono presenti nel documento hanno valore 0.
+Regole grammaticali e l'ordine delle parole non sono rappresentabili tramite
+questa tecnica \cite{manning_raghavan_schutze_2008}.
+
+Ritornando al modello, per quanto riguarda Bag of Words i vettori delle feature
+testuali sono forniti in input direttamente al primo layer denso allo stesso
+modo delle variabili categoriche.
 
 \subsubsection{Tf-Idf}\label{section-tfidf} Tf-Idf (Term frequency-Inverse
 document frequency) \cite{manning_raghavan_schutze_2008}, al contrario di Bag of
