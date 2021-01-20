@@ -134,12 +134,43 @@ aumentano invece i bigrammi relativi a descrizioni mancanti.
      \label{Fig:minore_30}
    \end{minipage}
 \end{figure}
+
 \subsubsection{Preprocessing del testo}
-Inoltre, è stato effettuato un trattamento dei dati (cito paper sul text preprocessing) non strutturati convertendoli tutti in minuscolo).
-Sui dati testuali è stata effettuata una fase di lemmatizzazione (perchè usa vocabolario su cui tagliare le parole e cito articolo). Successivamente, sulle nuove parole ottenute è stata effettuata una fase di pulizia di questi campi non strutturati eliminando le stopwords, la punteggiatura, tutti i caratteri di lunghezza pari a 1 che non sono numeri (è stato deciso di mantenere tutti i numeri poichè molte descrizioni senza di essi perdono di significato) e sono state eliminate le emoji.
 
+Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
+\begin{enumerate}
+    \item conversione in caratteri minuscoli,
+    \item rimozione della punteggiatura,
+    \item rimozione delle \textit{stopwords},
+    \item rimozione delle parole di un solo carattere fatta eccezione per i
+    numeri la cui rimozione spesso complica la comprensione della descrizione,
+    \item rimozione delle emoji,
+    \item lemmatizzazione.
+\end{enumerate}
+% in realtà l'orine non è proprio così. cambiare mettendo lemmatizzazione
+% all'inizio? todo
 
-I valori del campo category\_name sono stati codificati in interi tramite la tecnica label encoding.
+Siccome alcuni degli approcci di cui verrà discusso hanno dimostrato performance migliori
+con preprocessing limitato alla conversione in minuscolo, in seguito, con
+preprocessing base si vorrà intendere appunto il preprocessing limitato alla sola
+conversione in minuscolo.
+% cito paper sul text preprocessing todo 
+% todo cite. Sui dati testuali è stata effettuata una fase di lemmatizzazione (perchè usa
+% vocabolario su cui tagliare le parole e cito articolo). Successivamente, sulle
+
+\subsubsection{Encoding}
+
+Per quanto riguarda le variabili categoriche, ovvero \textit{Brand\_name} e le
+sottocategorie di \textit{Category\_name},
+% todo è chiaro quali sono le
+% categooriche? altrimenti chiarire
+i valori sono stati codificati in interi tramite \textit{label encoding}.
+% todo parlare del label encoding?
+
+I campi testuali invece sono stati codificati in forma vettoriale utilizzando
+varie approcci che verranno in seguito discussi.
+
+% tipologie: bow/tfidf, dizionario e poi embedding, tokenizer di bert
 
 % todo: coefficiente di correlazione di  pearson?
 % todo: piccole analisi come correlazioni sono da mettere qui? oppure nella

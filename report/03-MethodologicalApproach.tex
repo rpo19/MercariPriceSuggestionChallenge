@@ -34,54 +34,6 @@ stato suddiviso in \textit{training-set}, \textit{validation-set} e
 validation per accertarsi che il modello non sia propenso all'overfitting ed il
 test per la valutazione finale.
 
-\subsubsection{Valutazione dell'errore}
-% loss e metriche
-
-Per quanto riguarda le performance in termini di errore la funzione di
-\textit{loss} utilizzata in fase di training è il \textit{Root Mean Squared
-Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle challenge
-per confrontare le performance dei vari partecipanti. Inoltre essa risulta
-adeguata al problema considerando il vasto intervallo dei valori dei prezzi.
-
-Di seguito la definizione e alcune osservazioni su di RMSLE e su un'ulteriore
-metrica utilizzata, il \textit{Mean Absolute Error (MAE)},
-che fornisce una più immediata comprensione rispetto al RMSLE. \\
-Mean Absolute Error (MAE):
-\begin{equation}
-    \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
-\end{equation}
-\\
-Mean Squared Logarithmic Error (MSLE): essendo calcolato a partire da un
-rapporto riflette l'errore relativo e di conseguenza risulta efficace laddove i
-valore assoluti presentano variazioni considerevoli.
-\begin{equation}
-    \frac{1}{n}
-        \sum_{i=1}^{n}
-            ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
-    =
-    \frac{1}{n}
-        \sum_{i=1}^{n}
-            \log^2(\frac{y_i+1}{\hat{y_i}+1})
-\end{equation}
-\\
-Root Mean Squared Logarithmic Error (RMSLE): la radice dell'MSLE.
-\begin{equation}
-    \sqrt{ 
-        \frac{1}{n}
-            \sum_{i=1}^{n}
-                ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
-    }
-\end{equation}
-
-% dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
-% dai vari approcci
-
-\subsubsection{Valutazione dei costi computazionali}
-
-Il numero dei parametri allenabili dei vari modelli sono stati annotati insieme
-al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
-\textit{Google Colab} abilitando l'accelerazione hardware GPU.
-
 \subsection{Categoriche}
 \textbf{Dire qualcosa sulle categoriche}
 
@@ -103,6 +55,7 @@ Dropout interposto per contrastare l'overfitting.
 % parlare di qualche altro parametro? di training del modello?
 
 \subsection{Rappresentazione del Testo}
+% todo parlare della dimensionalità. di cosa è un dizionario
 
 \subsubsection{Bag of Words}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
@@ -169,10 +122,16 @@ come regole semantiche o sintattiche, permettendo anche operazioni algebriche
 % dobbiamo sapere cosa significa semantico e sintattico
 
 % word embedding di keras
+\subsubsection{Keras Embedding Layer}
+
+Keras fornisce un implementazione di embedding sotto la forma di layer neurale
+e ne rende quindi possibile l'addestramento insieme al resto del modello;
+altrimenti permette di fissare il valore dei pesi semplificando l'integrazione
+con modelli pre-allenati.
 
 % Nel modello è stata utilizzata l'implementazione di word embedding fornita da
 % Keras sotto forma di layer. La sua dimensionalità è stata impostata a 50 e to
-% be continued
+% be continued... todo dire ciò in qualche modo
 
 
 \subsubsection{GLOVE}
@@ -261,6 +220,54 @@ pressochè invariato rispetto a quello precedentemente descritto, ovvero a
 seguito di BERT troviamo fino a due layer LSTM bidirezionali (uno per il nome),
 un GlobalMaxPooling1D e gli ultimi due layer Densi entrambi preceduti da un
 dropout.
+
+\subsubsection{Valutazione dell'errore}
+% loss e metriche
+
+Per quanto riguarda le performance in termini di errore la funzione di
+\textit{loss} utilizzata in fase di training è il \textit{Root Mean Squared
+Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle challenge
+per confrontare le performance dei vari partecipanti. Inoltre essa risulta
+adeguata al problema considerando il vasto intervallo dei valori dei prezzi.
+
+Di seguito la definizione e alcune osservazioni su di RMSLE e su un'ulteriore
+metrica utilizzata, il \textit{Mean Absolute Error (MAE)},
+che fornisce una più immediata comprensione rispetto al RMSLE. \\
+Mean Absolute Error (MAE):
+\begin{equation}
+    \frac{1}{n} \sum_{i=1}^{n} | y_i - \hat{y_i} |
+\end{equation}
+\\
+Mean Squared Logarithmic Error (MSLE): essendo calcolato a partire da un
+rapporto riflette l'errore relativo e di conseguenza risulta efficace laddove i
+valore assoluti presentano variazioni considerevoli.
+\begin{equation}
+    \frac{1}{n}
+        \sum_{i=1}^{n}
+            ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
+    =
+    \frac{1}{n}
+        \sum_{i=1}^{n}
+            \log^2(\frac{y_i+1}{\hat{y_i}+1})
+\end{equation}
+\\
+Root Mean Squared Logarithmic Error (RMSLE): la radice dell'MSLE.
+\begin{equation}
+    \sqrt{ 
+        \frac{1}{n}
+            \sum_{i=1}^{n}
+                ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
+    }
+\end{equation}
+
+% dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
+% dai vari approcci
+
+\subsubsection{Valutazione dei costi computazionali}
+
+Il numero dei parametri allenabili dei vari modelli sono stati annotati insieme
+al tempo richiesto per l'esecuzione di 10 epoche di train sulla piattaforma
+\textit{Google Colab} abilitando l'accelerazione hardware GPU.
 
 
 
