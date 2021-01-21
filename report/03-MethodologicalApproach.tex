@@ -226,10 +226,14 @@ di moduli encoder. Nasce al fine di fornire un modello
 pre-allenato adattabile semplicemente ad un vasto range di applicazioni tramite
 \textit{fine-tuning}. Tuttavia anche approcci \textit{feature-based} basati
 su BERT risultano efficaci \cite{devlin2018bert}.
+% todo feature based è giusto?
 
-In questo progetto BERT è stato utilizzato con un approccio
-feature-based e, ritornando al modello, occupa la stessa posizione dedicata
-agli embedding (figura \ref{fig:kerasModel}), per entrambi i campi nome e descrizione.
+In questo progetto è stato utilizzata una versione più leggera e veloce ottenuta
+da BERT tramite \textit{Knowledge distillation}, ovvero DistilBert
+\cite{sanh2020distilbert}, con un approccio feature-based.
+
+Ritornando al modello, occupa la stessa posizione dedicata agli embedding
+(figura \ref{fig:kerasModel}), per entrambi i campi nome e descrizione.
 
 \subsubsection{Training e valutazione}
 
