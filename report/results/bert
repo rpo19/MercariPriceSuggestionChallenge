@@ -28,3 +28,6 @@ val_root_mean_squared_error: 35.9587 - val_mean_squared_logarithmic_error:
 0.3121 - val_root_mean_squared_logarithmic_error: 0.5576
 
 crash before test
+
+old log
+453/453 [==============================] - 1733s 4s/step - loss: 0.5675 - mse: 1256.7464 - mae: 13.4240 - root_mean_squared_error: 35.4326 - mean_squared_logarithmic_error: 0.3226 - root_mean_squared_logarithmic_error: 0.5675 - val_loss: 0.5444 - val_mse: 1157.3416 - val_mae: 12.7427 - val_root_mean_squared_error: 34.0197 - val_mean_squared_logarithmic_error: 0.2970 - val_root_mean_squared_logarithmic_error: 0.5445
