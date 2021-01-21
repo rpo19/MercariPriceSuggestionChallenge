@@ -172,7 +172,7 @@ denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[
-		height=6cm,
+		height=5cm,
 		keepaspectratio,
 	]{kerasModel.png}
 	\caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali usanti tanh come funzione d'attivazione e dropout.}
@@ -191,15 +191,15 @@ inoltre disponibili modelli GloVe pre-addestrati; seguono quelli valutati nel
 progetto.
 \begin{itemize}
 	\item Wikipedia 2014 + Gigaword 5: allenato su 6 miliardi di parole e con un
-	vocabolario di 400 mila parole; il più "piccolo" tra i pre-addrestrati.
+	vocabolario di 400 mila parole. Fornisce vettori 50 dimensioni ed è il più "piccolo" tra i pre-addrestrati.
 	\item Common Crawl: allenato su 840 miliardi di parole e con un vocabolario
-	di 2.2 milioni di parole; il più grande.
+	di 2.2 milioni di parole; è il più grande e fornisce vettori di 300 dimensioni.
 \end{itemize}
 
 % todo modello glove embedding keras trainable false
 Per quanto riguarda il modello, trattandosi di word embedding, è stata
 utilizzata la stessa architettura del modello Keras assegnando i pesi
-preaddestrati ai layer Embedding che sono stati impostati come non-trainabili.
+preaddestrati e la corretta dimensionalità ai layer Embedding che sono stati impostati come non-trainabili.
 % todo 50% copertura nei risultato
 
 \subsubsection{Transformers}
@@ -285,6 +285,15 @@ sul trainset e quello richiesto dalla predict sul testset.
 È stata utilizzata la piattaforma \textit{Google Colab} abilitando l'accelerazione hardware GPU.
 
 
-\subsection{TODO}
+\subsection{Parametri di training}
 
-adam, earlystopping, batchsize, learning rate, numero parametri.
+\paragraph{Numero di neuroni} Il numero di neuroni dei vari layer è stato
+impostato ai valori mostrati nelle figure \ref{fig:modeltemplate} e
+\ref{fig:kerasModel} in modo da migliorare le performance di regressione
+mantenendo i tempi di training fattibili.
+
+\paragraph{optimizer} Come optimizer è stato utilizzato Adam (Adaptive Moment
+Estimation) impostando il learning rate a 1e-4, in quanto il training è
+risultato più stabile che con il default di 1e-3.
+
+\paragraph{Batchsize} La batchsize è stata impostata a 256 dopo alcuni test sperimentali.
