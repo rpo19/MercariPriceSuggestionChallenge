@@ -1,0 +1,30 @@
+Total params: 66,543,009
+Trainable params: 180,129
+Non-trainable params: 66,362,880
+
+
+The parameters `output_attentions`, `output_hidden_states` and `use_cache` cannot be updated when calling a model.They have to be set to True/False in the config object (i.e.: `config=XConfig.from_pretrained('name', output_attentions=True)`).
+The parameter `return_dict` cannot be set in graph mode and will always be set to `True`.
+Epoch 1/5
+The parameters `output_attentions`, `output_hidden_states` and `use_cache` cannot be updated when calling a model.They have to be set to True/False in the config object (i.e.: `config=XConfig.from_pretrained('name', output_attentions=True)`).
+The parameter `return_dict` cannot be set in graph mode and will always be set to `True`.
+905/905 [==============================] - ETA: 0s - loss: 0.7693 - mse: 1625.2340 - mae: 17.5733 - root_mean_squared_error: 40.3142 - mean_squared_logarithmic_error: 0.6197 - root_mean_squared_logarithmic_error: 0.7693The parameters `output_attentions`, `output_hidden_states` and `use_cache` cannot be updated when calling a model.They have to be set to True/False in the config object (i.e.: `config=XConfig.from_pretrained('name', output_attentions=True)`).
+The parameter `return_dict` cannot be set in graph mode and will always be set to `True`.
+The parameters `output_attentions`, `output_hidden_states` and `use_cache` cannot be updated when calling a model.They have to be set to True/False in the config object (i.e.: `config=XConfig.from_pretrained('name', output_attentions=True)`).
+The parameter `return_dict` cannot be set in graph mode and will always be set to `True`.
+905/905 [==============================] - 1619s 2s/step - loss: 0.7693 - mse: 1625.2340 - mae: 17.5733 - root_mean_squared_error: 40.3142 - mean_squared_logarithmic_error: 0.6197 - root_mean_squared_logarithmic_error: 0.7693 - val_loss: 0.6188 - val_mse: 1477.7086 - val_mae: 14.5412 - val_root_mean_squared_error: 38.4410 - val_mean_squared_logarithmic_error: 0.3842 - val_root_mean_squared_logarithmic_error: 0.6189
+Epoch 2/5
+905/905 [==============================] - 1600s 2s/step - loss: 0.6334 - mse: 1348.3384 - mae: 14.6883 - root_mean_squared_error: 36.7197 - mean_squared_logarithmic_error: 0.4027 - root_mean_squared_logarithmic_error: 0.6334 - val_loss: 0.5860 - val_mse: 1416.1570 - val_mae: 13.7480 - val_root_mean_squared_error: 37.6319 - val_mean_squared_logarithmic_error: 0.3447 - val_root_mean_squared_logarithmic_error: 0.5860
+Epoch 3/5
+905/905 [==============================] - 1601s 2s/step - loss: 0.6027 - mse: 1282.1501 - mae: 14.0816 - root_mean_squared_error: 35.8071 - mean_squared_logarithmic_error: 0.3645 - root_mean_squared_logarithmic_error: 0.6027 - val_loss: 0.5584 - val_mse: 1298.4337 - val_mae: 13.3358 - val_root_mean_squared_error: 36.0338 - val_mean_squared_logarithmic_error: 0.3129 - val_root_mean_squared_logarithmic_error: 0.5584
+Epoch 4/5
+905/905 [==============================] - 1598s 2s/step - loss: 0.5831 - mse: 1229.4794 - mae: 13.6837 - root_mean_squared_error: 35.0639 - mean_squared_logarithmic_error: 0.3411 - root_mean_squared_logarithmic_error: 0.5830 - val_loss: 0.5520 - val_mse: 1257.2323 - val_mae: 13.1433 - val_root_mean_squared_error: 35.4575 - val_mean_squared_logarithmic_error: 0.3058 - val_root_mean_squared_logarithmic_error: 0.5520
+Epoch 5/5
+905/905 [==============================] - 1598s 2s/step - loss: 0.5702 - mse:
+1195.7321 - mae: 13.4153 - root_mean_squared_error: 34.5794 -
+mean_squared_logarithmic_error: 0.3262 - root_mean_squared_logarithmic_error:
+0.5701 - val_loss: 0.5576 - val_mse: 1293.0295 - val_mae: 12.9786 -
+val_root_mean_squared_error: 35.9587 - val_mean_squared_logarithmic_error:
+0.3121 - val_root_mean_squared_logarithmic_error: 0.5576
+
+crash before test
