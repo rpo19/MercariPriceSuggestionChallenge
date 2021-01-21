@@ -12,7 +12,19 @@
 %     \item embeddings: keras, glove pretrained. dire perchè non abbiamo provato
 %     qualcosa tipo word2vec?
 %     \item transformers con fine tuning
-% \end{itemize} 
+% \end{itemize}
+
+\subsection{Modello finale}
+
+Per quanto riguarda i layer RNN le tipologie di layer valutate sono: LSTM, GRU e
+Bidirectional LSTM. Questi ultime, essendo in grado di catturare relazione sia
+con parole precedenti che con e successive, si sono dimostrati più performanti e
+sono stati utilizzati nel modello finale.
+
+Sono stati inoltre valutati layer convoluzionali a monte dei layer RNN; tuttavia
+non avendo migliorato considerevolevolmente le performance sono stati omessi nel
+modello finale.
+% todo numeri dei layers?
 
 \subsection{Transformers}
 
