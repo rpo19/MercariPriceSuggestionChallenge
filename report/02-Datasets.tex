@@ -96,7 +96,7 @@ zero; 0.048 per l'esattezza.
 Analizzando le word cloud ottenute dai bigrammi delle descrizioni dopo aver
 suddiviso i prodotti in quattro fasce di prezzo (figure \ref{fig:100},
 \ref{Fig:50_100}, \ref{fig:30_50} e \ref{Fig:minore_30}) si riescono a notare
-delle differenze sulle coppie parole più frequenti, identificabili perchè di
+delle differenze sulle coppie di parole più frequenti, identificabili perchè di
 dimensioni più grandi.
 
 Nella wordcloud dei prodotti con prezzo maggiore o uguale a \$100 (Figura
@@ -149,6 +149,7 @@ Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
 \end{enumerate}
 % in realtà l'orine non è proprio così. cambiare mettendo lemmatizzazione
 % all'inizio? todo
+In questo lavoro è stato utilizzato la lemmatizzazione poiché usa un vocabolario per determinare la forma base di una parola, mentre lo stemming è un processo euristico che taglia le estremità delle parole cercando di ottenere la forma base corretta \cite{balakrishnan2014stemming}. 
 
 Siccome alcuni degli approcci di cui verrà discusso hanno dimostrato performance migliori
 con preprocessing limitato alla conversione in minuscolo, in seguito, con
@@ -168,7 +169,7 @@ i valori sono stati codificati in interi tramite \textit{label encoding}.
 % todo parlare del label encoding?
 
 I campi testuali invece sono stati codificati in forma vettoriale utilizzando
-varie approcci che verranno in seguito discussi.
+vari approcci che verranno in seguito discussi.
 
 % tipologie: bow/tfidf, dizionario e poi embedding, tokenizer di bert
 
