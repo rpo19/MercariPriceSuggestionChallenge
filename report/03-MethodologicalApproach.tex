@@ -30,8 +30,9 @@ partire dalle sole features non testuali in modo tale da stabilire un punto di
 partenza per la successiva analisi delle testuali, \textit{name} e
 \textit{item\_description}, più complesse e computazionalmente costose.
 
-È stato utilizzato un semplice modello composto da due layer Densi con un layer
-Dropout interposto per contrastare l'overfitting.
+È stato utilizzato un semplice modello composto da due layer Densi entrambi
+seguiti da un layer di Dropout impostato a 0.2 per contrastare l'overfitting ed
+infine un layer finale Denso con funzione d'attivazione lineare.
 Questo modello verrà in seguito ampliato per utilizzare anche le feature
 testuali a seconda dei vari approcci.
 La figura \ref{fig:modeltemplate} ne mostra un template.
@@ -42,7 +43,7 @@ La figura \ref{fig:modeltemplate} ne mostra un template.
 		height=6cm,
 		keepaspectratio,
 	]{modelTemplate.png}
-	\caption{Template del modello}
+	\caption{Template del modello con numero di neuroni e rate di dropout cerchiati}
 	\label{fig:modeltemplate}
 \end{figure}
 
@@ -175,7 +176,7 @@ denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
 		height=5cm,
 		keepaspectratio,
 	]{kerasModel.png}
-	\caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali usanti tanh come funzione d'attivazione e dropout.}
+	\caption{Keras Embedding, sezione testo del modello; si mostra l'approccio finale dove per Bi\_LSTM si intendono layer LSTM bidirezionali con dropout a 0.2.}
 	\label{fig:kerasModel}
 \end{figure}
 
@@ -289,11 +290,16 @@ sul trainset e quello richiesto dalla predict sul testset.
 
 \paragraph{Numero di neuroni} Il numero di neuroni dei vari layer è stato
 impostato ai valori mostrati nelle figure \ref{fig:modeltemplate} e
-\ref{fig:kerasModel} in modo da migliorare le performance di regressione
-mantenendo i tempi di training fattibili.
+\ref{fig:kerasModel} in modo da migliorare le performance di regressione.
 
-\paragraph{optimizer} Come optimizer è stato utilizzato Adam (Adaptive Moment
-Estimation) impostando il learning rate a 1e-4, in quanto il training è
+\paragraph{Optimizer} Come optimizer è stato utilizzato Adam impostando il learning rate a 1e-4, in quanto il training è
 risultato più stabile che con il default di 1e-3.
 
-\paragraph{Batchsize} La batchsize è stata impostata a 256 dopo alcuni test sperimentali.
+\paragraph{Batchsize} La batchsize è stata impostata a 256 dopo alcuni test
+sperimentali.
+
+\paragraph{Regolarizzazione} Oltre ai layer Dropout è stato testata la
+regolarizzazione L2, tuttavia non ha portato a evidenti miglioramenti ed è
+quindi stata omessa. Inoltre abbiamo utilizzato l'earlystopping sull'errore del
+validation con pazienza impostata a 3 epoche e in modo da ripristinare i pesi
+più performanti rispetto al validation.
