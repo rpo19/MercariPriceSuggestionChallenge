@@ -291,13 +291,16 @@ sul trainset e quello richiesto dalla predict sul testset.
 
 
 \subsection{Parametri di training}
+% todo sono risultati?
 
 \paragraph{Numero di neuroni} Il numero di neuroni dei vari layer è stato
 impostato ai valori mostrati nelle figure \ref{fig:modeltemplate} e
 \ref{fig:kerasModel} in modo da migliorare le performance di regressione.
 
 \paragraph{Optimizer} Come optimizer è stato utilizzato Adam impostando il learning rate a 1e-4, in quanto il training è
-risultato più stabile che con il default di 1e-3.
+risultato più stabile che con il default di 1e-3 per la maggior parte degli
+approcci ad eccezione dell'Embedding Keras che ha dimostrato un comportamento
+migliore con il learning rate di default.
 
 \paragraph{Batchsize} La batchsize è stata impostata a 256 dopo alcuni test
 sperimentali.
