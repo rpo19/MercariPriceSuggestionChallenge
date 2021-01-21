@@ -16,19 +16,15 @@ Epoch 6/10
 3618/3618 [==============================] - 811s 224ms/step - loss: 0.5092 - mse: 1086.6867 - mae: 12.1175 - root_mean_squared_error: 32.9564 - mean_squared_logarithmic_error: 0.2603 - root_mean_squared_logarithmic_error: 0.5092 - val_loss: 0.4886 - val_mse: 1090.7463 - val_mae: 11.5059 - val_root_mean_squared_error: 33.0264 - val_mean_squared_logarithmic_error: 0.2398 - val_root_mean_squared_logarithmic_error: 0.4887
 Epoch 7/10
 3618/3618 [==============================] - 801s 221ms/step - loss: 0.4933 - mse: 1024.6949 - mae: 11.6848 - root_mean_squared_error: 32.0032 - mean_squared_logarithmic_error: 0.2442 - root_mean_squared_logarithmic_error: 0.4933 - val_loss: 0.4777 - val_mse: 1045.5297 - val_mae: 11.2531 - val_root_mean_squared_error: 32.3347 - val_mean_squared_logarithmic_error: 0.2291 - val_root_mean_squared_logarithmic_error: 0.4777
-Epoch 8/10
-3618/3618 [==============================] - 775s 214ms/step - loss: 0.4794 - mse: 962.7866 - mae: 11.3442 - root_mean_squared_error: 31.0254 - mean_squared_logarithmic_error: 0.2306 - root_mean_squared_logarithmic_error: 0.4794 - val_loss: 0.4724 - val_mse: 1000.1328 - val_mae: 11.1080 - val_root_mean_squared_error: 31.6249 - val_mean_squared_logarithmic_error: 0.2241 - val_root_mean_squared_logarithmic_error: 0.4724
-Epoch 9/10
-3618/3618 [==============================] - 742s 205ms/step - loss: 0.4689 - mse: 932.2211 - mae: 11.1307 - root_mean_squared_error: 30.5280 - mean_squared_logarithmic_error: 0.2207 - root_mean_squared_logarithmic_error: 0.4689 - val_loss: 0.4679 - val_mse: 992.8590 - val_mae: 10.9970 - val_root_mean_squared_error: 31.5097 - val_mean_squared_logarithmic_error: 0.2199 - val_root_mean_squared_logarithmic_error: 0.4679
-Epoch 10/10
-3618/3618 [==============================] - 726s 201ms/step - loss: 0.4594 - mse: 885.1994 - mae: 10.8958 - root_mean_squared_error: 29.7474 - mean_squared_logarithmic_error: 0.2118 - root_mean_squared_logarithmic_error: 0.4594 - val_loss: 0.4652 - val_mse: 957.2796 - val_mae: 10.9228 - val_root_mean_squared_error: 30.9399 - val_mean_squared_logarithmic_error: 0.2174 - val_root_mean_squared_logarithmic_error: 0.4652
+
+12 minuti epoche
 
 test:
 
 9043/9043 [==============================] - 118s 13ms/step - loss: 0.4578 - mse: 855.2409 - mae: 10.8487 - root_mean_squared_error: 29.2445 - mean_squared_logarithmic_error: 0.2161 - root_mean_squared_logarithmic_error: 0.4578
-{'loss': 0.4578080475330353,
- 'mae': 10.848687171936035,
- 'mean_squared_logarithmic_error': 0.2160569429397583,
- 'mse': 855.2409057617188,
- 'root_mean_squared_error': 29.244503021240234,
- 'root_mean_squared_logarithmic_error': 0.4578019678592682}
+{'loss': 0.4466233551502228,
+ 'mae': 10.502782821655273,
+ 'mean_squared_logarithmic_error': 0.20583398640155792,
+ 'mse': 793.7896728515625,
+ 'root_mean_squared_error': 28.174272537231445,
+ 'root_mean_squared_logarithmic_error': 0.4466181695461273}
