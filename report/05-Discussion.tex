@@ -5,24 +5,47 @@
 % particular approach taken by the group. For example: Based on the results, how
 % could the experimental procedure be improved? What additional, future work may
 % be warranted? What recommendations can be drawn?
+\subsection{Modello Finale}
+\subsubsection{Parametri di training}
 
-\subsection{Modello Finale Embedding}
+\paragraph{Numero di neuroni:} Il numero di neuroni del modello finale dei vari
+layer è mostrato nelle figure \ref{fig:modeltemplate} e \ref{fig:kerasModel}
+allo stesso modo del rate di dropout.
+
+\paragraph{Optimizer:} Come optimizer è stato utilizzato Adam impostando il
+learning rate a 1e-4, in quanto il training è risultato più stabile per la
+maggior parte degli approcci ad eccezione dell'Embedding Keras che ha dimostrato
+un comportamento migliore con il learning rate di default (1e-3).
+
+\paragraph{Batchsize:} La batchsize è stata impostata a 256.
+
+\paragraph{Regolarizzazione:} Oltre ai layer Dropout è stato testata la
+regolarizzazione L2, tuttavia non ha portato a evidenti miglioramenti ed è
+quindi stata omessa. Inoltre è stato impostato l'earlystopping a monitoraggio
+dell'errore sul validation impostando pazienza a 3 epoche e il ripristino
+automatico dei pesi più performanti.
+
+\subsubsection{Layer aggiuntivi per il testo}
 
 Per quanto concerne i layer aggiuntivi in coda agli Embedding sono state
 valutate le seguenti tipologie di RNN: LSTM, GRU e Bidirectional LSTM. Queste
 ultime, essendo in grado di catturare relazioni sia con parole precedenti che
 con parole successive \cite{schuster1997bidirectional}, si sono dimostrate più
-performanti e sono stati utilizzati nel modello finale.
+performanti e compaiono nel modello finale.
 
-Sono stati inoltre valutati layer convoluzionali a monte dei layer RNN; tuttavia
+Sono stati inoltre valutati layer convoluzionali a precedere i layer RNN; tuttavia
 non avendo migliorato considerevolmente le performance sono stati omessi nel
 modello finale.
-% todo numeri dei layers?
-L'aggiunta di un layer GlobalMaxPooling1D a seguire le
-Bi\_LSTM (figura \ref{fig:kerasModel}) si è dimostrata efficace sia per rendere
-la dimensionalità compatibile con i successivi layer Densi che nell'effettuare
-un \textit{downsampling} per ridurre la dimensionalità così come i
-costi computazionali.
+
+L'aggiunta di un layer GlobalMaxPooling1D a seguire le Bi\_LSTM (figura
+\ref{fig:kerasModel}) si è dimostrata efficace sia per rendere la dimensionalità
+compatibile con i successivi layer Densi che nell'effettuare un
+\textit{downsampling} riducendo la dimensionalità insieme ai costi
+computazionali.
+
+\subsubsection{Dimensione Word Embedding}
+La dimensione del word embedding Keras, ovvero quello allenato insieme al resto
+del modello, è stata impostata a 50.
 
 \subsection{Embedding pretrainati}
 In tabella \ref{tab:restable} si nota come i modelli word embedding
@@ -35,11 +58,14 @@ miglioramenti sulle performance in termini di errore rispetto al preprocessing
 limitato, nonostante nel caso degli embedding pre-trainati il preprossing
 completo permette una maggiore copertura delle parole del vocabolario: da 32\%
 a 38\% per GloVe6B e da 42\% a 52\% per GloVe840B.
-Ciò potrebbe essere dovuto al fatto che gli
-embedding essendo in grado di catturare relazioni semantiche tra le parole non
+
+Per quanto riguarda gli embedding ciò può essere dovuto al fatto che essendo in grado di catturare relazioni semantiche tra le parole non
 necessitano di un alto grado di preprossesing che rimuovendo le stopwords, ad
 esempio, potrebbe perfino complicare l'apprendimento del significato della
 frase.
+
+Risulta invece inaspettato il risultato ottenuto con il preprocessing totale
+applicato a Bag of Word e Tf-Idf.
 
 Si nota invece una generale diminuzione del numero di parametri (figura
 \ref{fig:resParam}) che in alcuni casi si traduce in una riduzione del tempo
@@ -47,20 +73,34 @@ richiesto da una singola epoca di train (figura \ref{fig:resEtime}).
 
 % todo perchè bow non beneficia della pulizia?
 
-\subsection{Confronto approcci}
-Il modello più performante è stato quello basato sull'embedding Keras
-allenabile, evidenziato in verde nella tabella \ref{tab:restable}.
-È stata una piacevole sorpresa il risulato ottenuto da Bag of Word che pur
+\subsection{Performance}
+Il modello più performante dal punto di vista dell'errore di regressione risulta
+l'embedding Keras allenato con il resto del modello, evidenziato in verde nella
+tabella \ref{tab:restable}. Seguono gli approcci Bag of Word e Tf-Idf;
+quest'ultimo tuttavia non sembra migliorare i risulatati del più semplice BoW.
+
+Dal punto di vista computazionale invece, la durata di una singola epoca di Bag
+of Word è notevolmente minore rispetto a quella dell'embedding Keras allenato,
+tuttavia considerando il numero di epoche necessarie alla convergenza ci
+accorgiamo che i tempi di training risultano simili: 5000s per BoW e 5530s per
+Keras. È necessario ricordare che però Keras è stato allenato con un learning
+rate maggiore che per BoW risultava invece in una scarsa stabilità.
+
+Sono invece gli Embedding GloVe pretrainati ad essere i più veloci nella singola
+epoca di training, senza tener conto del modello di riferimento tenente conto
+delle sole feature non testuali, avendo il numero minore di
+parametri allenabili come mostrato in figura \ref{fig:resParam}. Anch'esse
+tuttavia richiedono numerose epoche per convergere. Non risultano esserci
+notevoli differenza ne di errori ne di costi computazionali tra i due embedding
+pretrainati GloVe6B e GloVe840B.
+
+\subsection{BERT}
+
+Non è stato possibile per motivazioni computazionali allenare questo
+modello sulla totalità del dataset ma è stata utilizzata porzione del
+dataset per il training (circa 200 mila istanze) completando solo 5 epoche.
+Tuttavia considerando queste limitazioni i risultati sembrano promettenti.
+
+È stata una piacevole sorpresa il risultato ottenuto da Bag of Word che pur
 essendo l'approccio più semplice testato ottiene ottimi risultati sia in termini
 di errore che di richieste computazionali rappresentandone un buon compresso.
-
-\subsection{Transformers}
-
-% todo: l'ho scritto nel 03. andrà modificato un po'.
-% necessario aggiungere performance
-Non è stato purtroppo possibile per motivazioni computazionali allenare questo
-modello sulla totalità del dataset e le limitazioni delle risorse di Google
-Colab hanno reso obbligata la scelta di utilizzare una piccola porzione del
-dataset per il training. Tuttavia i risultati sul validation sono
-particolarmente buoni considerando la ridotta quantità di esempi di training a
-disposizione rispetto ai modelli precedenti.

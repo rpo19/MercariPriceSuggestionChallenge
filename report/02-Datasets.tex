@@ -7,10 +7,8 @@
 Il dati sono reperibili direttamente dalla pagina web della challenge; sono
 presenti un dataset di train e uno di test. Per la valutazione è stato utilizzato
 esclusivamente il train in quanto il test è pensato esclusivamente per la
-challenge e non contenendo i prezzi target risulta inutile per la valutazione.
-
-Il dataset di train rappresenta quindi il dataset preso in esame e ogni
-riferimento successivo al dataset è da intendersi al dataset di train.
+challenge e non contenendo i prezzi target risulta inutile per la valutazione;
+ogni riferimento successivo al dataset è quindi da intendersi al dataset di train.
 
 Il numero di prodotti contenuti è di circa 1.39 milioni e per ognuno di essi
 sono fornite le seguenti caratteristiche.
@@ -18,25 +16,26 @@ sono fornite le seguenti caratteristiche.
 % nell'intro?)
 
 \paragraph{Price:} rappresenta il prezzo di vendita dell'articolo, ovvero la
-variabile target della regressione. Il suo valore medio è di circa \$26, con un
-minimo pari a \$0, un massimo di \$2009 e una deviazione standard di circa \$38.
+variabile target della regressione. Il suo valore oscilla tra \$0 e \$2009 con
+una media pari a circa \$26.
 Analizzando meglio la distribuzione si nota che in generale i prezzi sono
 relativamente bassi: inferiori a \$29 per il 75\% dei prodotti.
 
 Dopo aver appreso dal sito ufficiale di Mercari che i prezzi sono impostabili
-tra \$5 e \$2000 \cite{mercari-how-to-set-a-price}, sono stati rimossi tutti i prodotti con prezzo minori di 5 e maggiori di 2000.
+tra \$5 e \$2000 \cite{mercari-how-to-set-a-price}, sono stati considerati solo
+i prodotti appartenenti all'intervallo.
 
 \paragraph{Train\_id:} rappresenta l'identificativo del prodotto nell'elenco.
 
 \paragraph{Name:} è il nome del prodotto sotto forma di dato non strutturato.
 % todo dato non strutturato. meglio testo?
 
-\paragraph{Shipping:} rappresenta di chi, tra venditore e acquirente, sono a carico
-le spese di spedizione: il valore 1 significa "a carico del
+\paragraph{Shipping:} rappresenta di chi, tra venditore e acquirente, sono a
+carico le spese di spedizione: il valore 1 significa "a carico del
 venditore", 0 invece dell'acquirente.
 
-Il 45\% dei prodotti è spedito a carico del venditore (Shipping=1), mentre il
-restante 55\% a carico dell'acquirente (Shipping=0).
+Il 45\% dei prodotti è spedito a carico del venditore, mentre il
+restante 55\% dell'acquirente.
 
 Ci si potrebbe aspettare che i prodotti spediti a carico del venditore abbiano
 prezzi più elevati; tuttavia  per quanto riguarda il dataset in
@@ -81,33 +80,24 @@ Nel dataset sono presenti 4 istanze senza descrizione e
 circa 82 mila con la stringa "no description yet"; in entrambi i casi
 \textit{item\_description} è stato impostato a "NA".
 
-Inoltre, non sembra esistere una relazione lineare tra lunghezza delle
-descrizioni e prezzo, in quanto l'indice di correlazione di Pearson è prossimo a
-zero; 0.048 per l'esattezza.
-% todo, omettere? abbiamo calcolato la correlazione solo sulle descrizioni?
-
-Analizzando le word cloud ottenute dai bigrammi delle descrizioni dopo aver
-suddiviso i prodotti in quattro fasce di prezzo (figure \ref{fig:100},
-\ref{Fig:50_100}, \ref{fig:30_50} e \ref{Fig:minore_30}) si riescono a notare
-delle differenze sulle coppie di parole più frequenti, identificabili perchè di
-dimensioni più grandi.
-
-Nella wordcloud dei prodotti con prezzo maggiore o uguale a \$100 (Figura
-\ref{fig:100}) sono molto frequenti bigrammi che danno informazioni sulle buone
-condizioni dei prodotti, ad esempio: "100 authentic", "great condition" e "good
-condition". Al diminuire del prezzo questi bigrammi diventano meno frequenti;
-aumentano invece i bigrammi relativi a descrizioni mancanti.
+Nelle diverse wordcloud ottenute dai bigrammi delle descrizioni (figure
+\ref{fig:100}, \ref{Fig:50_100}, \ref{fig:30_50} e \ref{Fig:minore_30}) si nota
+che i prodotti con prezzo maggiore o uguale a \$100 (Figura \ref{fig:100}) sono
+spesso descritti con informazioni sulle buone condizioni dei prodotti, ad
+esempio: "100 authentic", "great condition" e "good condition". Al diminuire del
+prezzo queste coppie parole diventano meno frequenti; aumentano invece quelle
+relative a descrizioni mancanti.
 
 \begin{figure}[H]
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{maggiore_100}
+     \includegraphics[height=2.5cm, keepaspectratio]{maggiore_100}
 	\caption{Descrizioni dei prodotti con prezzo maggiore o uguale a \$100}
 	\label{fig:100}   
 	\end{minipage}\hfill
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{50_100}
+     \includegraphics[height=2.5cm, keepaspectratio]{50_100}
      \caption{Descrizioni dei prodotti con prezzo tra \$50 e \$100 esclusi}
      \label{Fig:50_100}
    \end{minipage}
@@ -116,13 +106,13 @@ aumentano invece i bigrammi relativi a descrizioni mancanti.
 \begin{figure}[H]
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{30_50}
+     \includegraphics[height=2.5cm, keepaspectratio]{30_50}
 	\caption{Descrizioni dei prodotti con prezzo maggiore di \$30 fino a \$50 incluso}
 	\label{fig:30_50}   
 	\end{minipage}\hfill
    \begin{minipage}{0.48\textwidth}
      \centering
-     \includegraphics[width=.9\linewidth]{minore_30}
+     \includegraphics[height=2.5cm, keepaspectratio]{minore_30}
      \caption{Descrizioni dei prodotti con prezzo minore o uguale a \$30}
      \label{Fig:minore_30}
    \end{minipage}
@@ -141,14 +131,9 @@ Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
     \item rimozione delle emoji.
 \end{enumerate}
 
-In questo lavoro è stato preferito utilizzare la lemmatizzazione poiché usa un
-vocabolario per determinare la forma base di una parola, rispetto allo stemming
-ovvero un processo euristico che rimuove le estremità delle parole cercando di
-ottenere la forma base corretta \cite{balakrishnan2014stemming}. 
-
-Siccome alcuni degli approcci di cui verrà discusso hanno dimostrato performance
-migliori con preprocessing limitato a conversione in minuscolo e rimozione della
-punteggiatura, in seguito, vi si farà riferimento con preprocessing limitato.
+In seguito si farà riferimenti al preprocessing completo che al preprocessing
+limitato ovvero composto dalle sole operazioni conversione in minuscolo e
+rimozione di punteggiatura.
 
 \subsubsection{Encoding}
 

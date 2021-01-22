@@ -31,9 +31,8 @@ partenza per la successiva analisi delle testuali, \textit{name} e
 \textit{item\_description}, più complesse e computazionalmente costose.
 
 È stato utilizzato un semplice modello composto da due layer Densi entrambi
-seguiti da un layer di Dropout impostato a 0.2 per contrastare l'overfitting ed
-infine un layer finale Denso con funzione d'attivazione lineare.
-Questo modello verrà in seguito ampliato per utilizzare anche le feature
+seguiti da un layer di Dropout con un layer Denso finale con funzione d'attivazione lineare.
+Questo modello verrà in seguito ampliato per fare uso delle feature
 testuali a seconda dei vari approcci.
 La figura \ref{fig:modeltemplate} ne mostra un template.
 
@@ -43,7 +42,7 @@ La figura \ref{fig:modeltemplate} ne mostra un template.
 		height=6cm,
 		keepaspectratio,
 	]{modelTemplate.png}
-	\caption{Template del modello con numero di neuroni e rate di dropout cerchiati}
+	\caption{Template del modello con numero di neuroni e rate di dropout finali cerchiati}
 	\label{fig:modeltemplate}
 \end{figure}
 
@@ -60,18 +59,20 @@ La figura \ref{fig:modeltemplate} ne mostra un template.
 % todo parlare della dimensionalità. di cosa è un dizionario
 
 Sono stati valutati diversi approcci per il trattamento del testo partendo da
-modelli semplici come \textit{Bag of Word} fino ai più recenti ed efficaci come \textit{BERT}.
+modelli semplici come \textit{Bag of Word} fino ai più recenti ed efficaci come
+\textit{BERT}, passando per i \textit{Word Embedding}.
 
 \subsubsection{Bag of Word}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
 Il modello bag-of-words permette di rappresentare il testo, come una sorta di
-"borsa" di parole dove per ogni "documento", o in
-questo caso per ogni \textit{name} o \textit{item\_description}, viene creato un
-vettore contenente il numero di occorrenze di ciascuna parola del vocabolario
-nel documento; di conseguenza questi vettori avendo cardinalità pari alla
-dimensione del vocabolario sono generalmente sparsi in quanto alle parole assenti
-dal documento corrisponde il valore 0.
-Regole grammaticali e l'ordine delle parole non sono rappresentabili
+"borsa" di parole dove per ogni "documento", o in questo caso per ogni
+\textit{name} o \textit{item\_description}, viene creato un vettore contenente
+il numero di occorrenze di ciascuna parola del vocabolario nel documento; questi
+vettori hanno cardinalità pari alla dimensione del vocabolario e sono
+generalmente sparsi dato che alle parole assenti dal documento corrisponde il
+valore 0.
+
+Regole grammaticali ordine delle parole non sono rappresentabili
 tramite questa tecnica \cite{manning_raghavan_schutze_2008}.
 
 Ritornando al modello, per quanto riguarda Bag of Words i vettori delle feature
@@ -86,18 +87,18 @@ segue la definizione.% (corpus). ?
 % todo: va bene parlare di documenti? vogliamo addattare più al nostro dataset?
 
 \begin{equation}
-\label{eq:tf}
-   tf_{t,d} = \frac{n_{t,d}}{|d|} 
+	\label{eq:tf}
+	tf_{t,d} = \frac{n_{t,d}}{|d|}
 \end{equation}
 \\
 \begin{equation}
-\label{eq:idf}
-   idf_{t} = \log \frac{|D|}{|\{d: t \in d\}|} 
+	\label{eq:idf}
+	idf_{t} = \log \frac{|D|}{|\{d: t \in d\}|}
 \end{equation}
 \\
 \begin{equation}
-\label{eq:tf-idf}
-    Tf\mbox{-}Idf_{t,d} = tf_{t,d} \cdot idf_t
+	\label{eq:tf-idf}
+	Tf\mbox{-}Idf_{t,d} = tf_{t,d} \cdot idf_t
 \end{equation}
 
 Dove $t$ indica il termine, $d$
@@ -109,8 +110,8 @@ approccio simile a Bag of Word i cui vettori, anzichè contenere semplicemente i
 numero di occorrenze della parola, ne contengono il valore Tf-Idf
 (\ref{eq:tf-idf}).
 
-Per quanto riguarda il modello è stato utilizzato allo stesso modo di Bag
-of Words. 
+All'interno del modello è stato utilizzato allo stesso modo di Bag
+of Words.
 
 % todo dobbiamo parlare del layer di concatenazione?
 
@@ -118,19 +119,11 @@ of Words.
 
 \subsubsection{Word Embedding}
 
-Le precedenti tecniche sono semplici da realizzare, robuste e funzionali per
-numerosi task. Tuttavia sono poco performanti in alcune applicazioni poiché
-trattano le parole come unità atomiche, senza apprenderne relazioni complesse
-ad esempio di similarità o causalità.
-% nel senso che non si capisce se una parola è simile ad un altra e non si hanno
-% relazioni del tipo una parola segue sempre l'altra. todo: è giusto dire
-% causalità?
-
 Con lo sviluppo delle tecniche di Machine Learning si sono diffusi i cosiddetti
-\textit{word embedding} che consentono di rappresentare parole per mezzo di
+\textit{word embedding} che rappresentano parole per mezzo di
 vettori densi e di lunghezza fissa \cite{almeida2019word}, fornendo di
 conseguenza una rappresentazione più efficiente rispetto alla \textit{Bag of
-words}.
+	words}.
 
 Inoltre questi vettori sono in grado di apprendere relazioni semantiche e
 sintattiche tra le parole \cite{mikolov2013efficient}.
@@ -138,37 +131,33 @@ sintattiche tra le parole \cite{mikolov2013efficient}.
 % word embedding di keras
 \subsubsection{Keras Embedding Layer}
 
-Keras fornisce un implementazione di embedding sotto la forma di layer neurale e
+Keras fornisce un implementazione di embedding sotto forma di layer neurale e
 ne rende quindi possibile l'addestramento insieme al resto del modello.
-
 % % todo dire dopo questa cosa con glove
 % Offre inoltre la possibilità di fissare il valore dei pesi semplificando
 % l'integrazione con modelli pre-allenati.
-
-Ritornando al modello, è necessario codificare le frasi di input sotto forma di
-vettori di interi, a tal proposito keras fornisce la classe
-\textit{tf.keras.preprocessing.\-text.Tokenizer}; questi vettori saranno in
-seguito dati in input al modello.
+\\
+Ritornando al modello, il testo in input è stato codificato in forma di
+vettori di interi, tramite la classe \textit{tf.keras.preprocessing.\-text.Tokenizer}.
 
 Tenendo come riferimento il template in figure
 \ref{fig:modeltemplate}, nella sezione che tratta il testo, precisamente in
-sostituzione al box "..." sono stati aggiunti due layer embedding, uno per
+sostituzione al box `...' sono stati aggiunti due layer embedding, uno per
 \textit{Name} e uno per \textit{Item\_description}, seguiti da layer aggiuntivi
 per sfruttare al meglio le informazioni degli embedding.
 
-In particolare sono stati utilizzati layer RNN poiché risultano ottimi per
-l'elaborazione di dati sequenziali, come il testo, essendo in grado di mantenere
-in "memoria" informazioni sugli elementi precedenti \cite{liang2017text}; ad
-esempio sono in grado di cogliere relazioni tra le parole di una stessa frase.
+In particolare sono stati utilizzati layer RNN in quanto ottimi per
+l'elaborazione di dati sequenziali, come il testo; infatti essendo in grado di
+mantenere in "memoria" informazioni sugli elementi precedenti
+\cite{liang2017text}; possono ad esempio cogliere relazioni tra varie parole nella frase.
 
 Nello specifico sono stati considerati layer LSTM, GRU e LSTM bidirezionali di
 cui si parlerà più dettagliatamente in seguito.
 
-Infine l'output di questi layer è stato assegnato come input al primo layer
-denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
+Infine l'output di questi layer aggiuntivi è stato assegnato come input al primo
+layer denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
 
-
-% todo conv
+% todo valutazione dimensioni dell embedding
 
 \begin{figure}[h!]
 	\centering
@@ -180,23 +169,19 @@ denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
 	\label{fig:kerasModel}
 \end{figure}
 
-% Nel modello è stata utilizzata l'implementazione di word embedding fornita da
-% Keras sotto forma di layer. La sua dimensionalità è stata impostata a 50 e to
-% be continued... todo dire ciò in qualche modo. magari nei risultati
-
 \subsubsection{GloVe}
 GloVe (Global Vectors) è un modello non supervisionato in grado di costruire
 word embedding a partire da statistiche globali (rispetto all'intero
 corpus) di co-occorrenza delle varie parole \cite{pennington2014glove}. Sono
-inoltre disponibili modelli GloVe pre-addestrati; seguono quelli valutati nel
+inoltre disponibili modelli GloVe pre-addestrati. Seguono quelli valutati nel
 progetto.
 \begin{itemize}
 	\item GloVe6B (Wikipedia 2014 + Gigaword 5): allenato su 6 miliardi di
-	parole e con un vocabolario di 400 mila parole. Fornisce vettori 50
-	dimensioni ed è il più "piccolo" tra i pre-addrestrati.
+	      parole e con un vocabolario di 400 mila parole. Fornisce vettori 50
+	      dimensioni ed è il più "piccolo" tra i pre-addrestrati.
 	\item GloVe840B (Common Crawl): allenato su 840 miliardi di parole e con un
-	vocabolario di 2.2 milioni di parole; è il più grande e fornisce vettori di
-	300 dimensioni.
+	      vocabolario di 2.2 milioni di parole; è il più grande e fornisce vettori di
+	      300 dimensioni.
 \end{itemize}
 
 % todo modello glove embedding keras trainable false
@@ -208,7 +193,7 @@ preaddestrati e la corretta dimensionalità ai layer Embedding che sono stati im
 \subsubsection{Transformers}
 % diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
 Il Transformer è un'architettura proposta successivamente alle RNN che vi si
-contrappone evitando la ricorrenza e utilizzando esclusivamente un meccanismo di
+contrappone evitando la ricorrenza ed utilizzando esclusivamente un meccanismo di
 \textit{attention} per rappresentare i rapporti di dipendenza di input e output.
 Si basa su di una struttura \textit{encoder-decoder} dove l'encoder fornisce al
 decoder una rappresentazione dell'input ed in seguito il decoder fornisce una
@@ -221,13 +206,12 @@ frase in output \cite{vaswani2017attention}.
 
 Una delle più note architetture basata sul concetto di Transformer è
 \textbf{BERT}, ovvero \textit{Bidirectional Encoder Representations from
-Transformers}; si tratta di un transformer multi-layer bidirezionale, cioè 
-che dato un input è in grado di apprenderne relazioni sia con input precedenti
-che successivi, e che si basa esclusivamente su
- moduli encoder. Nasce al fine di fornire un modello
-pre-allenato adattabile semplicemente ad un vasto range di applicazioni tramite
-\textit{fine-tuning}. Tuttavia anche approcci \textit{feature-based} basati
-su BERT risultano efficaci \cite{devlin2018bert}.
+	Transformers}: un transformer multi-layer bidirezionale, cioè che dato un input
+è in grado di apprenderne relazioni sia con input precedenti che successivi, e
+che si basa esclusivamente su moduli encoder. Nasce al fine di fornire un
+modello pre-allenato adattabile semplicemente ad un vasto range di applicazioni
+tramite \textit{fine-tuning}. Tuttavia anche approcci \textit{feature-based}
+basati su BERT risultano efficaci \cite{devlin2018bert}.
 % todo feature based è giusto?
 
 In questo progetto è stato utilizzata una versione più leggera e veloce ottenuta
@@ -250,67 +234,44 @@ stato suddiviso in \textit{training-set}, \textit{validation-set} e
 
 Per quanto riguarda le performance in termini di errore la funzione di
 \textit{loss} utilizzata in fase di training è il \textit{Root Mean Squared
-Logaritmic Error (RMSLE)}, in quanto è la misura scelta dalla Kaggle challenge
-per confrontare le performance dei vari partecipanti. Risulta inoltre
-adeguata al problema considerando il vasto intervallo dei valori dei prezzi.
+	Logaritmic Error (RMSLE)}; è inoltre la misura scelta dalla Kaggle challenge
+per confrontare le performance dei vari partecipanti.
 
 Seguono la definizione e alcune osservazioni su di RMSLE e MSLE.
 \\
-\textit{Mean Squared Logarithmic Error (MSLE)}, essendo calcolato a partire
-da un rapporto, riflette l'errore relativo e di conseguenza risulta efficace
-laddove i valore assoluti presentano variazioni considerevoli.
+\textit{Root Mean Squared Logarithmic Error (MSLE)}, 
 \begin{equation}
-    \frac{1}{n}
-        \sum_{i=1}^{n}
-            ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
-    =
-    \frac{1}{n}
-        \sum_{i=1}^{n}
-            \log^2(\frac{y_i+1}{\hat{y_i}+1})
-\end{equation}
-\\
-\textit{Root Mean Squared Logarithmic Error (RMSLE)} è la radice di MSLE.
-\begin{equation}
-    \sqrt{ 
-        \frac{1}{n}
-            \sum_{i=1}^{n}
-                ( \log(y_i+1) - \log(\hat{y_i}+1) )^2
-    }
+	RMSLE
+	=
+	\sqrt{
+	\frac{1}{n}
+	\sum_{i=1}^{n}
+	( \log(y_i+1) - \log(\hat{y_i}+1) )^2
+	}
+	=
+	\sqrt{
+		\frac{1}{n}
+		\sum_{i=1}^{n}
+		\log^2(\frac{y_i+1}{\hat{y_i}+1})
+	}
 \end{equation}
 
-% todo riassumere tutto in rmsle per guadagnare spazio
-
-% dire da qualche parte qualche altra valutaione: e.g. la computazione richiesta
-% dai vari approcci
+Essendo calcolato a partire da un rapporto, riflette l'errore relativo e di
+conseguenza risulta efficace laddove i valore assoluti presentano variazioni
+considerevoli, come per i prezzi in esame.
 
 % todo numero parametri
 
 \subsubsection{Valutazione dei costi computazionali}
 
 Per la valutazione dei costi computazionali sono stati annotati il numero dei
-parametri allenabili e non dei vari modelli, il tempo richiesto dall'allenamento
-sul trainset e quello richiesto dalla predict sul testset.
+parametri allenabili e non dei vari modelli e il tempo richiesto dalle epoche di
+allenamento sul trainset.
 
 È stata utilizzata la piattaforma \textit{Google Colab} abilitando l'accelerazione hardware GPU.
-
 
 \subsection{Parametri di training}
 % todo sono risultati?
 
-\paragraph{Numero di neuroni:} Il numero di neuroni dei vari layer è stato
-impostato ai valori mostrati nelle figure \ref{fig:modeltemplate} e
-\ref{fig:kerasModel} in modo da migliorare le performance di regressione.
-
-\paragraph{Optimizer:} Come optimizer è stato utilizzato Adam impostando il learning rate a 1e-4, in quanto il training è
-risultato più stabile che con il default di 1e-3 per la maggior parte degli
-approcci ad eccezione dell'Embedding Keras che ha dimostrato un comportamento
-migliore con il learning rate di default.
-
-\paragraph{Batchsize:} La batchsize è stata impostata a 256 dopo alcuni test
-sperimentali.
-
-\paragraph{Regolarizzazione:} Oltre ai layer Dropout è stato testata la
-regolarizzazione L2, tuttavia non ha portato a evidenti miglioramenti ed è
-quindi stata omessa. Inoltre abbiamo utilizzato l'earlystopping sull'errore del
-validation con pazienza impostata a 3 epoche e in modo da ripristinare i pesi
-più performanti rispetto al validation.
+I parametri di training sono stati impostati in seguito a test sperimentali in
+modo da minimizzare l'errore mantenendo accettabili i tempi di training richiesti.
