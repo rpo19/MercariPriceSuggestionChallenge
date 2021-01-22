@@ -57,12 +57,13 @@ GloVe840B.
 
 Per quanto riguarda gli embedding ciò può essere dovuto al fatto che essendo in
 grado di catturare relazioni semantiche tra le parole non necessitano di un alto
-grado di preprossesing ma siano anzi in grado di sfruttare le stopwords ad esempio.
+grado di preprocessing ma siano anzi in grado di sfruttare le stopwords ad esempio.
 
-È invece inaspettato il risultato ottenuto cobinandp preprocessing totale a Bag
+È invece inaspettato il risultato ottenuto combinando preprocessing totale a Bag
 of Word e Tf-Idf: l'errore è infatti leggermente più alto che con preprocessing
-limitato. Si deduce che operazioni come rimozione di stopwords e lemmatizzazione
-non hanno offerto un contributo rilevante ma anzi un leggero peggioramento. 
+limitato. Si deduce che le operazioni come rimozione di stopwords e
+lemmatizzazione non hanno offerto un contributo rilevante ma anzi un leggero
+peggioramento. 
 
 Si nota invece una generale diminuzione del numero di parametri (figura
 \ref{fig:resParam}) che in alcuni casi si traduce in una riduzione del tempo
@@ -71,22 +72,22 @@ richiesto dalle epoche di train (figura \ref{fig:resEtime}).
 \subsection{Performance}
 Il modello più performante dal punto di vista dell'errore risulta l'embedding
 Keras allenabile, evidenziato in verde nella tabella \ref{tab:restable}. Seguono
-gli approcci Bag of Word e Tf-Idf; quest'ultimo tuttavia non sembra migliorare i
-risulatati del più semplice BoW.
+gli approcci Bag of Words e Tf-Idf; quest'ultimo tuttavia non sembra migliorare i
+risultati del più semplice BoW.
 
 Dal punto di vista computazionale invece, la durata delle epoche di Bag
-of Word è notevolmente minore rispetto a quella dell'embedding Keras allenabile,
+of Words è notevolmente minore rispetto a quella dell'embedding Keras allenabile,
 ma considerando il numero di epoche necessarie alla convergenza ci
 accorgiamo che il tempo totale impiegato è simile: 5000s per BoW e 5530s per
 Keras. È necessario ricordare che Keras è stato allenato con un learning
 rate maggiore che per BoW risultava invece in una scarsa stabilità.
 
-Sono invece gli Embedding GloVe pretrainati a richiedere il minor tempo in una
+Sono invece gli Embedding GloVe pre-trainati a richiedere il minor tempo in una
 singola epoca di training (ignorando il modello senza feature non testuali),
 avendo il numero minore di parametri allenabili come mostrato in figura
 \ref{fig:resParam}. Anch'esse tuttavia richiedono numerose epoche per
 convergere. Inoltre Non risultano esserci notevoli differenze di errore o costi
-computazionali tra i due embedding pretrainati GloVe6B e GloVe840B.
+computazionali tra i due embedding pre-trainati GloVe6B e GloVe840B.
 
 \subsection{BERT}
 

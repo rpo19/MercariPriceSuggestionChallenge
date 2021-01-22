@@ -56,10 +56,10 @@ La figura \ref{fig:modeltemplate} ne mostra un template.
 % todo parlare della dimensionalità. di cosa è un dizionario
 
 Sono stati valutati diversi approcci per il trattamento del testo partendo da
-modelli semplici come \textit{Bag of Word} fino ai più recenti ed efficaci come
+modelli semplici come \textit{Bag of Words} fino ai più recenti ed efficaci come
 \textit{BERT}, passando per i \textit{Word Embedding}.
 
-\subsubsection{Bag of Word}
+\subsubsection{Bag of Words}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
 Il modello bag-of-words permette di rappresentare il testo tramite un vettore
 per ogni documento contenente il numero di occorrenze di ciascuna parola del
@@ -93,8 +93,8 @@ definizione.% (corpus). ?
 Dove $t$ indica il termine, $d$ il documento, $n_{t,d}$ la frequenza assoluta di
 t in d, $D$ l'insieme dei documenti.
 
-Per Tf-Idf come approccio di rappresentazione del testo si vuole indendere un
-approccio simile a Bag of Word i cui vettori, anzichè contenere il
+Per Tf-Idf come approccio di rappresentazione del testo si vuole intendere un
+approccio simile a Bag of words i cui vettori, anziché contenere il
 numero di occorrenze contengono il valore Tf-Idf (\ref{eq:tf-idf}) della parola.
 
 All'interno del modello è stato utilizzato allo stesso modo di Bag
@@ -156,7 +156,7 @@ progetto.
 \end{itemize}
 
 Per quanto riguarda il modello è stata utilizzata la stessa architettura del
-modello Keras assegnando i pesi preaddestrati e la corretta dimensionalità ai
+modello Keras assegnando i pesi pre-addestrati e la corretta dimensionalità ai
 layer Embedding e impostandoli come non-trainabili.
 
 \subsubsection{Transformers}

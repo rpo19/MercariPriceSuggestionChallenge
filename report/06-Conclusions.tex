@@ -6,6 +6,23 @@
 % discussed. It is considered extremely bad form to introduce new data in the
 % conclusions.
 
-È stata una piacevole sorpresa il risultato ottenuto da Bag of Word che pur
-essendo l'approccio più semplice testato ottiene ottimi risultati sia in termini
-di errore che di richieste computazionali rappresentandone un buon compresso.
+Riassumendo dai risultati ottenuti si evince che l'Embedding Keras allenabile
+permette di ottenere ottime performance in cambio di costi computazionali
+accettabili, perciò questa tecnica risulta consigliata nel caso in cui si abbia a
+disposizione una piattaforma almeno comparabile con Google Colab.
+
+Bag of Words è stata una piacevole sorpresa infatti pur essendo l'approccio più
+semplice testato ottiene ottimi risultati ed è probabilmente attuabile anche
+da chi ha particolari limitazioni computazionali.
+
+È stato inoltre evidenziato che il pre-processing del testo effettuato non sempre giova
+alle performance e sarebbe interessante valutare approcci alternativi a quello
+utilizzato nel progetto.
+
+Nel caso si abbiano a disposizione grandi risorse computazionali si potrebbe
+valutare approfonditamente l'approccio basato su BERT che potrebbe portare a
+performance ottimali.
+
+Un altro approccio che varrebbe la pena testare sarebbe l'utilizzo di un embedding
+pre-trainato con GloVe come punto di partenza per poi allenarne ulteriormente i
+pesi magari ampliando le dimensioni dell'embedding in caso si abbiano risorse sufficienti.
