@@ -14,25 +14,3 @@
 %     \item transformers con fine tuning
 % \end{itemize}
 
-\subsection{Modello finale}
-
-Per quanto riguarda i layer RNN le tipologie di layer valutate sono: LSTM, GRU e
-Bidirectional LSTM. Questi ultime, essendo in grado di catturare relazione sia
-con parole precedenti che con e successive \cite{schuster1997bidirectional}, si sono dimostrati più performanti e
-sono stati utilizzati nel modello finale.
-
-Sono stati inoltre valutati layer convoluzionali a monte dei layer RNN; tuttavia
-non avendo migliorato considerevolevolmente le performance sono stati omessi nel
-modello finale.
-% todo numeri dei layers?
-
-\subsection{Transformers}
-
-% todo: l'ho scritto nel 03. andrà modificato un po'.
-% necessario aggiungere performance
-Non è stato purtroppo possibile per motivazioni computazionali allenare questo
-modello sulla totalità del dataset ma è le limitazioni delle risorse di Google
-Colab hanno reso obbligata la scelta di utilizzare una piccola porzione del
-dataset per il training. Tuttavia i risultati sul validation sono
-particolarmente buoni considerando la ridotta quantità di esempi di training a
-disposizione rispetto ai modelli precedenti.
