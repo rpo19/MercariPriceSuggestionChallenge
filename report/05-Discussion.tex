@@ -1,13 +1,31 @@
-The discussion section aims at interpreting the results in light of the project's objectives. The most important goal of this section is to interpret the results so that the reader is informed of the insight or answers that the results provide. This section should also present an evaluation of the particular approach taken by the group. For example: Based on the results, how could the experimental procedure be improved? What additional, future work may be warranted? What recommendations can be drawn?
-Il modello più performante è stato quello basato sull'embedding "custom" tramite i layers appositi e durante la valutazione dei layer RNN sono state valutate le seguenti tipologie: LSTM, GRU e
-Bidirectional LSTM. Queste ultime, essendo in grado di catturare relazioni sia
-con parole precedenti che con parole successive \cite{schuster1997bidirectional}, si sono dimostrati più performanti e
-sono stati utilizzati nel modello finale.
+% The discussion section aims at interpreting the results in light of the
+% project's objectives. The most important goal of this section is to interpret
+% the results so that the reader is informed of the insight or answers that the
+% results provide. This section should also present an evaluation of the
+% particular approach taken by the group. For example: Based on the results, how
+% could the experimental procedure be improved? What additional, future work may
+% be warranted? What recommendations can be drawn?
+
+Il modello più performante è stato quello basato sull'embedding Keras
+allenabile, evidenziato in verde nella tabella \ref{tab:restable},
+tramite i layers appositi e durante la valutazione dei layer RNN sono state
+valutate le seguenti tipologie: LSTM, GRU e Bidirectional LSTM. Queste ultime,
+essendo in grado di catturare relazioni sia con parole precedenti che con parole
+successive \cite{schuster1997bidirectional}, si sono dimostrati più performanti
+e sono stati utilizzati nel modello finale.
 
 Sono stati inoltre valutati layer convoluzionali a monte dei layer RNN; tuttavia
 non avendo migliorato considerevolmente le performance sono stati omessi nel
 modello finale.
 % todo numeri dei layers?
+Sui testi è stato utilizzato un layer GlobalMaxPooling1D in seguito alle
+Bi\_LSTM (figura \ref{fig:kerasModel}) per renderne la dimensionalità compatibile con i layer Densi
+effettuando anche un \textit{downsampling} che riduce dimensionalità così come
+costi computazionali.
+
+In tabella \ref{tab:restable} si nota come i modelli word embedding
+pre-allenati (GloVe) richiedano un numero di epoche maggiore per convergere.
+
 
 \subsection{Transformers}
 
