@@ -14,3 +14,43 @@
 %     \item transformers con fine tuning
 % \end{itemize}
 
+\begin{table}[H]
+    \begin{tabular}{|l|r|r|r|r|r|}
+        \hline
+        Modello          & TotalParams     & TrainParams     & EpochTime     & N\#Epochs       & Rmsle  \\ \hline
+        BoW              & 6.678.049         & 6.678.049         & 250           & 20             & 0.4486 \\
+        BoW\_clean       & 6.225.953         & 6.225.953         & 250           & 19             & 0.4510 \\
+        TfIdf            & 6.678.049         & 6.678.049         & 250           & 20             & 0.4576 \\
+        TfIdf\_clean     & 6.225.953         & 6.225.953         & 250           & 20             & 0.4540 \\
+        GloVe6B          & 119.191.497       & 75.297           & 117           & 39             & 0.4725 \\
+        GloVe6B\_clean   & 90.674.697        & 75.297           & 118           & 53             & 0.4703 \\
+        GloVe840B        & 119.191.497       & 75.297           & 135           & 40             & 0.4607 \\
+        GloVe840B\_clean & 90.674.697        & 75.297           & 121           & 40             & 0.4633 \\
+        Bert             & 66.543.009        & 180.129          & 1600          & 5              & 0.5576 \\
+        NonText          & 769             & 769             & 14            & 40             & 0.6564 \\
+        Keras            & 198.719.97        & 19.871.997        & 790           & 7              & 0.4460 \\
+        Keras\_clean     & 15.119.197        & 151.191.97        & 549           & 9              & 0.4525 \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        height=8cm,
+        keepaspectratio,
+    ]{aml_rmsle_epocht_trainp.png}
+    \caption{Rmsle sul test in funzione della Durata di un epoca di training.
+        La dimensione corrisponde ai Parametri Allenabili.}
+    \label{fig:modeltemplate}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[
+        height=8cm,
+        keepaspectratio,
+    ]{aml_rmsle_trainp_totp.png}
+    \caption{Rmsle sul test in funzione del Numeri di Parametri Allenabili. La dimensione corrisponde ai Parametri Totali.}
+    \label{fig:modeltemplate}
+\end{figure}
+
