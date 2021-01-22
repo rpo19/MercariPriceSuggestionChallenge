@@ -1,1 +1,21 @@
-The ABSTRACT is not a part of the body of the report itself. Rather, the abstract is a brief summary of the report contents that is often separately circulated so potential readers can decide whether to read the report. The abstract should very concisely summarize the whole report: why it was written, what was discovered or developed, and what is claimed to be the significance of the effort. The abstract does not include figures or tables, and only the most significant numerical values or results should be given.
+% The ABSTRACT is not a part of the body of the report itself. Rather, the
+% abstract is a brief summary of the report contents that is often separately
+% circulated so potential readers can decide whether to read the report. The
+% abstract should very concisely summarize the whole report: why it was written,
+% what was discovered or developed, and what is claimed to be the significance of
+% the effort. The abstract does not include figures or tables, and only the most
+% significant numerical values or results should be given.
+
+Il progetto si incentra su di un problema di regressione derivato dalla Kaggle
+Challenge Mercari Price Suggestion che consiste nella predizione del prezzo di
+vendita prodotti a partire da feature testuali e non. È stata effettuata una
+valutazione sia in termini di performance di regressione che di costi
+computazionali di diversi approcci al problema, soprattutto relativi alla
+rappresentazione del testo, come Bag of Words e Word Embeddings, valutando il
+contributo del pre-processing del testo. Inoltre è stata valutata l'efficacia di
+diversi tipi di layer neurali nella gestione del testo. In conclusione sono
+state ottenute ottime performance utilizzando un Word Embedding allenabile
+tramite il layer Embedding di Keras in combinazione a layer LSTM bidirezionali.
+Bag of Words è risultata una buona alternativa pur essendo più semplice e
+computazionalmente più economico. Per quanto riguarda il pre-processing del
+testo, l'approccio condotto non ha portato miglioramenti degni di nota.
