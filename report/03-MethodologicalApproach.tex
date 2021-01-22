@@ -23,12 +23,9 @@
 % system and how and to what extent you overcame them. Common problems are:
 % difficulties involving existing software.
 
-\subsection{Feature non testuali}
-
-Inizialmente sono state valutate le performance di regressione dei prezzi a
-partire dalle sole features non testuali in modo tale da stabilire un punto di
-partenza per la successiva analisi delle testuali, \textit{name} e
-\textit{item\_description}, più complesse e computazionalmente costose.
+Inizialmente sono state valutate le performance a
+partire dalle sole features non testuali così da stabilire un punto di
+partenza per la successiva analisi di quelle testuali.
 
 È stato utilizzato un semplice modello composto da due layer Densi entrambi
 seguiti da un layer di Dropout con un layer Denso finale con funzione d'attivazione lineare.
@@ -64,15 +61,13 @@ modelli semplici come \textit{Bag of Word} fino ai più recenti ed efficaci come
 
 \subsubsection{Bag of Word}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
-Il modello bag-of-words permette di rappresentare il testo, come una sorta di
-"borsa" di parole dove per ogni "documento", o in questo caso per ogni
-\textit{name} o \textit{item\_description}, viene creato un vettore contenente
-il numero di occorrenze di ciascuna parola del vocabolario nel documento; questi
-vettori hanno cardinalità pari alla dimensione del vocabolario e sono
-generalmente sparsi dato che alle parole assenti dal documento corrisponde il
-valore 0.
+Il modello bag-of-words permette di rappresentare il testo tramite un vettore
+per ogni documento contenente il numero di occorrenze di ciascuna parola del
+vocabolario nel documento; questi vettori hanno cardinalità pari alla dimensione
+del vocabolario e assegnando 0 in caso di parole dal documento assenti sono
+generalmente sparsi.
 
-Regole grammaticali ordine delle parole non sono rappresentabili
+Regole grammaticali e ordine delle parole non sono rappresentabili
 tramite questa tecnica \cite{manning_raghavan_schutze_2008}.
 
 Ritornando al modello, per quanto riguarda Bag of Words i vettori delle feature
@@ -80,50 +75,36 @@ testuali sono forniti in input direttamente al primo layer denso allo stesso
 modo delle variabili non testuali.
 
 \subsubsection{Tf-Idf}\label{section-tfidf} Tf-Idf (Term frequency-Inverse
-document frequency) \cite{manning_raghavan_schutze_2008} è una misura volta a
-rappresentare l'importanza di una parola rispetto al documento che la contiene
-in rapporto all'importanza della stessa nell'intera collezione di documenti;
-segue la definizione.% (corpus). ?
+document frequency) \cite{manning_raghavan_schutze_2008} è una misura
+dell'importanza di una parola rispetto al documento che la contiene in rapporto
+all'importanza della stessa nell'intera collezione di documenti; segue la
+definizione.% (corpus). ?
 % todo: va bene parlare di documenti? vogliamo addattare più al nostro dataset?
 
 \begin{equation}
-	\label{eq:tf}
-	tf_{t,d} = \frac{n_{t,d}}{|d|}
-\end{equation}
-\\
-\begin{equation}
-	\label{eq:idf}
-	idf_{t} = \log \frac{|D|}{|\{d: t \in d\}|}
-\end{equation}
-\\
-\begin{equation}
 	\label{eq:tf-idf}
-	Tf\mbox{-}Idf_{t,d} = tf_{t,d} \cdot idf_t
+	Tf\mbox{-}Idf_{t,d}
+	=
+	tf_{t,d} \cdot idf_t
+	=
+	\frac{n_{t,d}}{|d|} \cdot \log \frac{|D|}{|\{d: t \in d\}|}
 \end{equation}
 
-Dove $t$ indica il termine, $d$
-indica il documento, $n_{t,d}$ la frequenza assoluta di t in d, $D$ l'insieme
-dei documenti, $|d|$ il numero di termini in $d$ e $|D|$ il numero di documenti.
+Dove $t$ indica il termine, $d$ il documento, $n_{t,d}$ la frequenza assoluta di
+t in d, $D$ l'insieme dei documenti.
 
 Per Tf-Idf come approccio di rappresentazione del testo si vuole indendere un
-approccio simile a Bag of Word i cui vettori, anzichè contenere semplicemente il
-numero di occorrenze della parola, ne contengono il valore Tf-Idf
-(\ref{eq:tf-idf}).
+approccio simile a Bag of Word i cui vettori, anzichè contenere il
+numero di occorrenze contengono il valore Tf-Idf (\ref{eq:tf-idf}) della parola.
 
 All'interno del modello è stato utilizzato allo stesso modo di Bag
 of Words.
 
-% todo dobbiamo parlare del layer di concatenazione?
-
-% abbiamo dovuto aumentare i parametri rispetto alle categoriche?
-
 \subsubsection{Word Embedding}
 
-Con lo sviluppo delle tecniche di Machine Learning si sono diffusi i cosiddetti
-\textit{word embedding} che rappresentano parole per mezzo di
-vettori densi e di lunghezza fissa \cite{almeida2019word}, fornendo di
-conseguenza una rappresentazione più efficiente rispetto alla \textit{Bag of
-	words}.
+I cosiddetti \textit{word embedding} rappresentano parole per mezzo di vettori
+densi di lunghezza fissa \cite{almeida2019word}, contrapponendosi a  \textit{Bag
+	of words}.
 
 Inoltre questi vettori sono in grado di apprendere relazioni semantiche e
 sintattiche tra le parole \cite{mikolov2013efficient}.
@@ -132,7 +113,7 @@ sintattiche tra le parole \cite{mikolov2013efficient}.
 \subsubsection{Keras Embedding Layer}
 
 Keras fornisce un implementazione di embedding sotto forma di layer neurale e
-ne rende quindi possibile l'addestramento insieme al resto del modello.
+ne rende quindi possibile l'addestramento insieme a layer restanti.
 % % todo dire dopo questa cosa con glove
 % Offre inoltre la possibilità di fissare il valore dei pesi semplificando
 % l'integrazione con modelli pre-allenati.
@@ -142,22 +123,13 @@ vettori di interi, tramite la classe \textit{tf.keras.preprocessing.\-text.Token
 
 Tenendo come riferimento il template in figure
 \ref{fig:modeltemplate}, nella sezione che tratta il testo, precisamente in
-sostituzione al box `...' sono stati aggiunti due layer embedding, uno per
+sostituzione al box ``...'' sono stati aggiunti due layer embedding, uno per
 \textit{Name} e uno per \textit{Item\_description}, seguiti da layer aggiuntivi
-per sfruttare al meglio le informazioni degli embedding.
-
-In particolare sono stati utilizzati layer RNN in quanto ottimi per
-l'elaborazione di dati sequenziali, come il testo; infatti essendo in grado di
-mantenere in "memoria" informazioni sugli elementi precedenti
-\cite{liang2017text}; possono ad esempio cogliere relazioni tra varie parole nella frase.
-
-Nello specifico sono stati considerati layer LSTM, GRU e LSTM bidirezionali di
-cui si parlerà più dettagliatamente in seguito.
+per sfruttare al meglio le informazioni degli embedding di cui verrà discusso in
+seguito.
 
 Infine l'output di questi layer aggiuntivi è stato assegnato come input al primo
 layer denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
-
-% todo valutazione dimensioni dell embedding
 
 \begin{figure}[h!]
 	\centering
@@ -176,50 +148,41 @@ corpus) di co-occorrenza delle varie parole \cite{pennington2014glove}. Sono
 inoltre disponibili modelli GloVe pre-addestrati. Seguono quelli valutati nel
 progetto.
 \begin{itemize}
-	\item GloVe6B (Wikipedia 2014 + Gigaword 5): allenato su 6 miliardi di
-	      parole e con un vocabolario di 400 mila parole. Fornisce vettori 50
-	      dimensioni ed è il più "piccolo" tra i pre-addrestrati.
-	\item GloVe840B (Common Crawl): allenato su 840 miliardi di parole e con un
-	      vocabolario di 2.2 milioni di parole; è il più grande e fornisce vettori di
-	      300 dimensioni.
+	\item GloVe6B (Wikipedia 2014 + Gigaword 5): con vettori di 50 dimensioni
+	      allenati su 6 miliardi di parole, con un vocabolario di 400 mila
+	      parole.
+	\item GloVe840B (Common Crawl): con vettori di 300 dimensioni allenato su
+	      840 miliardi di parole, con un vocabolario di 2.2 milioni parole.
 \end{itemize}
 
-% todo modello glove embedding keras trainable false
-Per quanto riguarda il modello, trattandosi di word embedding, è stata
-utilizzata la stessa architettura del modello Keras assegnando i pesi
-preaddestrati e la corretta dimensionalità ai layer Embedding che sono stati impostati come non-trainabili.
-% todo 50% copertura nei risultato
+Per quanto riguarda il modello è stata utilizzata la stessa architettura del
+modello Keras assegnando i pesi preaddestrati e la corretta dimensionalità ai
+layer Embedding e impostandoli come non-trainabili.
 
 \subsubsection{Transformers}
 % diremo che il trasform supera lstm. todo pro-cons lstm: tipo memoria,...
-Il Transformer è un'architettura proposta successivamente alle RNN che vi si
-contrappone evitando la ricorrenza ed utilizzando esclusivamente un meccanismo di
-\textit{attention} per rappresentare i rapporti di dipendenza di input e output.
-Si basa su di una struttura \textit{encoder-decoder} dove l'encoder fornisce al
-decoder una rappresentazione dell'input ed in seguito il decoder fornisce una
-frase in output \cite{vaswani2017attention}.
+Il Transformer è un'architettura basata su di una struttura
+\textit{encoder-decoder} che utilizza un meccanismo di
+\textit{attention} per rappresentare i rapporti di dipendenza di input e output \cite{vaswani2017attention}.
 
 % todo decidere se togliere l'anno
 
 % BERT’s model architecture is a multi-layer bidirectional Transformer encoder
 % based on the original implementation
 
-Una delle più note architetture basata sul concetto di Transformer è
-\textbf{BERT}, ovvero \textit{Bidirectional Encoder Representations from
-	Transformers}: un transformer multi-layer bidirezionale, cioè che dato un input
-è in grado di apprenderne relazioni sia con input precedenti che successivi, e
-che si basa esclusivamente su moduli encoder. Nasce al fine di fornire un
-modello pre-allenato adattabile semplicemente ad un vasto range di applicazioni
-tramite \textit{fine-tuning}. Tuttavia anche approcci \textit{feature-based}
-basati su BERT risultano efficaci \cite{devlin2018bert}.
-% todo feature based è giusto?
+Una dei più noti transformer è \textit{BERT}, \textit{Bidirectional Encoder
+Representations from Transformers}), dove per bidirezionale si intende capace di
+apprenderne relazioni sia con input precedenti che successivi, che si basa
+esclusivamente su moduli encoder. Nasce per fornire un modello pre-allenato
+adattabile a numerose applicazioni tramite \textit{fine-tuning}.
+Tuttavia anche utilizzi \textit{feature-based} risultano efficaci
+\cite{devlin2018bert}.
 
-In questo progetto è stato utilizzata una versione più leggera e veloce ottenuta
-da BERT tramite \textit{Knowledge distillation}, ovvero DistilBert
-\cite{sanh2020distilbert}, con un approccio feature-based.
+In questo progetto è stato utilizzato \textit{DistilBert}, una versione più leggera ottenuta
+da BERT tramite \textit{Knowledge distillation} \cite{sanh2020distilbert}, con un approccio feature-based.
 
 Ritornando al modello, occupa la stessa posizione dedicata agli embedding
-(figura \ref{fig:kerasModel}), per entrambi i campi nome e descrizione.
+(figura \ref{fig:kerasModel}) per entrambi i campi nome e descrizione.
 
 \subsection{Training e valutazione}
 
@@ -239,7 +202,7 @@ per confrontare le performance dei vari partecipanti.
 
 Seguono la definizione e alcune osservazioni su di RMSLE e MSLE.
 \\
-\textit{Root Mean Squared Logarithmic Error (MSLE)}, 
+\textit{Root Mean Squared Logarithmic Error (MSLE)},
 \begin{equation}
 	RMSLE
 	=
@@ -264,7 +227,7 @@ considerevoli, come per i prezzi in esame.
 
 \subsubsection{Valutazione dei costi computazionali}
 
-Per la valutazione dei costi computazionali sono stati annotati il numero dei
+Per valutare dei costi computazionali sono stati annotati il numero dei
 parametri allenabili e non dei vari modelli e il tempo richiesto dalle epoche di
 allenamento sul trainset.
 
