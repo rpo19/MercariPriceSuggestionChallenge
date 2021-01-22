@@ -65,13 +65,14 @@ esempio, potrebbe perfino complicare l'apprendimento del significato della
 frase.
 
 Risulta invece inaspettato il risultato ottenuto con il preprocessing totale
-applicato a Bag of Word e Tf-Idf.
+applicato a Bag of Word e Tf-Idf: l'errore è infatti leggermente più alto rispetto
+a quello con preprocessing limitato. Si deduce che operazioni come
+rimozione di stopwords e lemmatizzazione non hanno offerto un contributo
+rilevante ma anzi un leggero peggioramento. 
 
 Si nota invece una generale diminuzione del numero di parametri (figura
 \ref{fig:resParam}) che in alcuni casi si traduce in una riduzione del tempo
 richiesto da una singola epoca di train (figura \ref{fig:resEtime}).
-
-% todo perchè bow non beneficia della pulizia?
 
 \subsection{Performance}
 Il modello più performante dal punto di vista dell'errore di regressione risulta
