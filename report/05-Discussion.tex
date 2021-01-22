@@ -6,26 +6,53 @@
 % could the experimental procedure be improved? What additional, future work may
 % be warranted? What recommendations can be drawn?
 
-Il modello più performante è stato quello basato sull'embedding Keras
-allenabile, evidenziato in verde nella tabella \ref{tab:restable},
-tramite i layers appositi e durante la valutazione dei layer RNN sono state
-valutate le seguenti tipologie: LSTM, GRU e Bidirectional LSTM. Queste ultime,
-essendo in grado di catturare relazioni sia con parole precedenti che con parole
-successive \cite{schuster1997bidirectional}, si sono dimostrati più performanti
-e sono stati utilizzati nel modello finale.
+\subsection{Modello Finale Embedding}
+
+Per quanto concerne i layer aggiuntivi in coda agli Embedding sono state
+valutate le seguenti tipologie di RNN: LSTM, GRU e Bidirectional LSTM. Queste
+ultime, essendo in grado di catturare relazioni sia con parole precedenti che
+con parole successive \cite{schuster1997bidirectional}, si sono dimostrate più
+performanti e sono stati utilizzati nel modello finale.
 
 Sono stati inoltre valutati layer convoluzionali a monte dei layer RNN; tuttavia
 non avendo migliorato considerevolmente le performance sono stati omessi nel
 modello finale.
 % todo numeri dei layers?
-Sui testi è stato utilizzato un layer GlobalMaxPooling1D in seguito alle
-Bi\_LSTM (figura \ref{fig:kerasModel}) per renderne la dimensionalità compatibile con i layer Densi
-effettuando anche un \textit{downsampling} che riduce dimensionalità così come
+L'aggiunta di un layer GlobalMaxPooling1D a seguire le
+Bi\_LSTM (figura \ref{fig:kerasModel}) si è dimostrata efficace sia per rendere
+la dimensionalità compatibile con i successivi layer Densi che nell'effettuare
+un \textit{downsampling} per ridurre la dimensionalità così come i
 costi computazionali.
 
+\subsection{Embedding pretrainati}
 In tabella \ref{tab:restable} si nota come i modelli word embedding
 pre-allenati (GloVe) richiedano un numero di epoche maggiore per convergere.
 
+\subsection{Pulizia del testo}
+
+Generalmente il preprocessing completo del testo non ha prodotto evidenti
+miglioramenti sulle performance in termini di errore rispetto al preprocessing
+limitato, nonostante nel caso degli embedding pre-trainati il preprossing
+completo permette una maggiore copertura delle parole del vocabolario: da 32\%
+a 38\% per GloVe6B e da 42\% a 52\% per GloVe840B.
+Ciò potrebbe essere dovuto al fatto che gli
+embedding essendo in grado di catturare relazioni semantiche tra le parole non
+necessitano di un alto grado di preprossesing che rimuovendo le stopwords, ad
+esempio, potrebbe perfino complicare l'apprendimento del significato della
+frase.
+
+Si nota invece una generale diminuzione del numero di parametri (figura
+\ref{fig:resParam}) che in alcuni casi si traduce in una riduzione del tempo
+richiesto da una singola epoca di train (figura \ref{fig:resEtime}).
+
+% todo perchè bow non beneficia della pulizia?
+
+\subsection{Confronto approcci}
+Il modello più performante è stato quello basato sull'embedding Keras
+allenabile, evidenziato in verde nella tabella \ref{tab:restable}.
+È stata una piacevole sorpresa il risulato ottenuto da Bag of Word che pur
+essendo l'approccio più semplice testato ottiene ottimi risultati sia in termini
+di errore che di richieste computazionali rappresentandone un buon compresso.
 
 \subsection{Transformers}
 
