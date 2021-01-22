@@ -4,7 +4,7 @@
 % manipulation processes, such as cleaning and enrichment with external sources,
 % must be presented and discussed.
 
-Il dati sono reperibili direttamente dalla pagina web della challenge; sono
+I dati sono reperibili direttamente dalla pagina web della challenge; sono
 presenti un dataset di train e uno di test. Per la valutazione è stato utilizzato
 esclusivamente il train in quanto il test è pensato esclusivamente per la
 challenge e non contenendo i prezzi target risulta inutile per la valutazione;
@@ -40,8 +40,7 @@ Kaggle challenge non ne fornisce una descrizione dettagliata del significato.
 
 \item \textbf{Category\_name:} rappresenta la categoria di prodotto a cui appartiene
 l'articolo.
-
-Circa 6000 gli articoli non hanno nessuna categoria assegnata, mentre i restanti
+Circa 6000 articoli non hanno nessuna categoria assegnata, mentre i restanti
 si suddividono in 1287 categorie, ad esempio \textit{"Women/Tops \&
 Blouses/T-Shirts"}, dove è facilmente osservabile una gerarchia di
 sottocategorie dalla più generica alla più specifica. Il campo
@@ -57,7 +56,6 @@ mancante: a questi prodotti è stato assegnato "NA" come \textit{Brand\_name}.
 % nel padding del text preprocessing 
 \item \textbf{Item\_description:} rappresenta la descrizione del prodotto sotto forma
 di dato non strutturato.
-
 Nel dataset sono presenti 4 istanze senza descrizione e
 circa 82 mila con la stringa "no description yet"; in entrambi i casi
 \textit{item\_description} è stato impostato a "NA".
@@ -67,7 +65,7 @@ Nelle wordcloud ottenute dai bigrammi delle descrizioni (figure
 che i prodotti con prezzo maggiore o uguale a \$100 (Figura \ref{fig:100}) sono
 spesso descritti con informazioni che ne mostrano le buone condizioni, ad
 esempio: "100 authentic", "great condition" e "good condition". Al diminuire del
-prezzo queste coppie parole diventano meno frequenti; aumentano invece quelle
+prezzo queste coppie di parole diventano meno frequenti; aumentano invece quelle
 relative a descrizioni mancanti.
 
 \end{itemize}
@@ -101,9 +99,9 @@ Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
   \item rimozione delle emoji.
 \end{enumerate}
 
-In seguito si farà riferimento al preprocessing completo che al preprocessing
-limitato ovvero composto dalle sole operazioni conversione in minuscolo e
-rimozione di punteggiatura.
+In seguito si farà riferimento sia al preprocessing completo che al preprocessing
+limitato, ovvero composto dalle sole operazioni "conversione in minuscolo" e
+"rimozione di punteggiatura".
 
 \subsubsection{Encoding}
 

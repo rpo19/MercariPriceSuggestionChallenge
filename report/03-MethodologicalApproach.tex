@@ -64,7 +64,7 @@ modelli semplici come \textit{Bag of Words} fino ai più recenti ed efficaci com
 Il modello bag-of-words permette di rappresentare il testo tramite un vettore
 per ogni documento contenente il numero di occorrenze di ciascuna parola del
 vocabolario nel documento; questi vettori hanno cardinalità pari alla dimensione
-del vocabolario e assegnando 0 in caso di parole dal documento assenti sono
+del vocabolario e assegnano 0 in caso di parole assenti dal documento, sono
 generalmente sparsi.
 
 Regole grammaticali e ordine delle parole non sono rappresentabili
@@ -129,7 +129,7 @@ per sfruttare al meglio le informazioni degli embedding di cui verrà discusso i
 seguito.
 
 Infine l'output di questi layer aggiuntivi è stato assegnato come input al primo
-layer denso come mostrato. La figura \ref{fig:kerasModel} ne mostra uno schema.
+layer denso. La figura \ref{fig:kerasModel} ne mostra uno schema.
 
 \begin{figure}[h!]
 	\centering
