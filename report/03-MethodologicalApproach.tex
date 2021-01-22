@@ -61,18 +61,17 @@ modelli semplici come \textit{Bag of Words} fino ai più recenti ed efficaci com
 
 \subsubsection{Bag of Words}
 % todo: dire qualcosa della dimensionalità di bow e tf idf?
-Il modello bag-of-words permette di rappresentare il testo tramite un vettore
+Il modello Bag of Words permette di rappresentare il testo tramite un vettore
 per ogni documento contenente il numero di occorrenze di ciascuna parola del
 vocabolario nel documento; questi vettori hanno cardinalità pari alla dimensione
-del vocabolario e assegnano 0 in caso di parole assenti dal documento, sono
+del vocabolario e assegnano 0 in caso di parole assenti dal documento; sono
 generalmente sparsi.
 
 Regole grammaticali e ordine delle parole non sono rappresentabili
 tramite questa tecnica \cite{manning_raghavan_schutze_2008}.
 
-Ritornando al modello, per quanto riguarda Bag of Words i vettori delle feature
-testuali sono forniti in input direttamente al primo layer denso allo stesso
-modo delle variabili non testuali.
+Ritornando al modello, i vettori delle feature testuali sono forniti in input
+direttamente al primo layer denso allo stesso modo delle variabili non testuali.
 
 \subsubsection{Tf-Idf}\label{section-tfidf} Tf-Idf (Term frequency-Inverse
 document frequency) \cite{manning_raghavan_schutze_2008} è una misura
@@ -102,9 +101,9 @@ of Words.
 
 \subsubsection{Word Embedding}
 
-I cosiddetti \textit{word embedding} rappresentano parole per mezzo di vettori
+I cosiddetti \textit{Word Embedding} rappresentano parole per mezzo di vettori
 densi di lunghezza fissa \cite{almeida2019word}, contrapponendosi a  \textit{Bag
-	of words}.
+	of Words}.
 
 Inoltre questi vettori sono in grado di apprendere relazioni semantiche e
 sintattiche tra le parole \cite{mikolov2013efficient}.
@@ -113,13 +112,13 @@ sintattiche tra le parole \cite{mikolov2013efficient}.
 \subsubsection{Keras Embedding Layer}
 
 Keras fornisce un implementazione di embedding sotto forma di layer neurale e
-ne rende quindi possibile l'addestramento insieme a layer restanti.
+ne rende quindi possibile l'addestramento insieme ai layer restanti.
 % % todo dire dopo questa cosa con glove
 % Offre inoltre la possibilità di fissare il valore dei pesi semplificando
 % l'integrazione con modelli pre-allenati.
 \\
 Ritornando al modello, il testo in input è stato codificato in forma di
-vettori di interi, tramite la classe \textit{tf.keras.preprocessing.\-text.Tokenizer}.
+vettori di interi, tramite la classe \textit{tf.keras.pre-processing.\-text.Tokenizer}.
 
 Tenendo come riferimento il template in figure
 \ref{fig:modeltemplate}, nella sezione che tratta il testo, precisamente in
@@ -130,6 +129,8 @@ seguito.
 
 Infine l'output di questi layer aggiuntivi è stato assegnato come input al primo
 layer denso. La figura \ref{fig:kerasModel} ne mostra uno schema.
+
+Quando in seguito si leggerà del modello Keras si intenderà questo approccio.
 
 \begin{figure}[h!]
 	\centering
@@ -143,16 +144,17 @@ layer denso. La figura \ref{fig:kerasModel} ne mostra uno schema.
 
 \subsubsection{GloVe}
 GloVe (Global Vectors) è un modello non supervisionato in grado di costruire
-word embedding a partire da statistiche globali (rispetto all'intero
+Word Embedding a partire da statistiche globali (rispetto all'intero
 corpus) di co-occorrenza delle varie parole \cite{pennington2014glove}. Sono
 inoltre disponibili modelli GloVe pre-addestrati. Seguono quelli valutati nel
 progetto.
 \begin{itemize}
+	\itemsep0em 
 	\item GloVe6B (Wikipedia 2014 + Gigaword 5): con vettori di 50 dimensioni
-	      allenati su 6 miliardi di parole, con un vocabolario di 400 mila
+	      allenati su 6 miliardi di parole e con un vocabolario di 400 mila
 	      parole.
 	\item GloVe840B (Common Crawl): con vettori di 300 dimensioni allenato su
-	      840 miliardi di parole, con un vocabolario di 2.2 milioni parole.
+	      840 miliardi di parole e con un vocabolario di 2.2 milioni parole.
 \end{itemize}
 
 Per quanto riguarda il modello è stata utilizzata la stessa architettura del
@@ -172,7 +174,7 @@ Il Transformer è un'architettura basata su di una struttura
 
 Una dei più noti transformer è \textit{BERT}, \textit{Bidirectional Encoder
 Representations from Transformers}), dove per bidirezionale si intende capace di
-apprenderne relazioni sia con input precedenti che successivi, che si basa
+apprendere relazioni sia con input precedenti che successivi, che si basa
 esclusivamente su moduli encoder. Nasce per fornire un modello pre-allenato
 adattabile a numerose applicazioni tramite \textit{fine-tuning}.
 Tuttavia anche utilizzi \textit{feature-based} risultano efficaci
@@ -200,9 +202,6 @@ Per quanto riguarda le performance in termini di errore la funzione di
 	Logaritmic Error (RMSLE)}; è inoltre la misura scelta dalla Kaggle challenge
 per confrontare le performance dei vari partecipanti.
 
-Seguono la definizione e alcune osservazioni su di RMSLE e MSLE.
-\\
-\textit{Root Mean Squared Logarithmic Error (MSLE)},
 \begin{equation}
 	RMSLE
 	=
@@ -227,9 +226,9 @@ considerevoli, come per i prezzi in esame.
 
 \subsubsection{Valutazione dei costi computazionali}
 
-Per valutare dei costi computazionali sono stati annotati il numero dei
-parametri allenabili e non dei vari modelli e il tempo richiesto dalle epoche di
-allenamento sul trainset.
+Per valutare i costi computazionali sono stati annotati il numero dei parametri
+allenabili e non dei vari modelli e il tempo richiesto dalle epoche di
+allenamento sul training set.
 
 È stata utilizzata la piattaforma \textit{Google Colab} abilitando l'accelerazione hardware GPU.
 
@@ -237,4 +236,4 @@ allenamento sul trainset.
 % todo sono risultati?
 
 I parametri di training sono stati impostati in seguito a test sperimentali in
-modo da minimizzare l'errore mantenendo accettabili i tempi di training richiesti.
+modo da minimizzare l'errore mantenendo accettabili i tempi richiesti.

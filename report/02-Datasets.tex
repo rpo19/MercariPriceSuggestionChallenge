@@ -6,7 +6,7 @@
 
 I dati sono reperibili direttamente dalla pagina web della challenge; sono
 presenti un dataset di train e uno di test. Per la valutazione è stato utilizzato
-esclusivamente il train in quanto il test è pensato esclusivamente per la
+esclusivamente il train in quanto il test è pensato per la
 challenge e non contenendo i prezzi target risulta inutile per la valutazione;
 ogni riferimento successivo al dataset è quindi da intendersi al dataset di train.
 
@@ -53,7 +53,7 @@ mila prodotti, ovvero poco meno della metà del totale, il campo risulta
 mancante: a questi prodotti è stato assegnato "NA" come \textit{Brand\_name}.
 
 % todo: scrivere quante parole hanno in media. serve poi nell'embedding? o più
-% nel padding del text preprocessing 
+% nel padding del text pre-processing 
 \item \textbf{Item\_description:} rappresenta la descrizione del prodotto sotto forma
 di dato non strutturato.
 Nel dataset sono presenti 4 istanze senza descrizione e
@@ -88,7 +88,7 @@ relative a descrizioni mancanti.
 
 \subsubsection{Preprocessing del testo}
 
-Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
+Il pre-processing del testo è stato effettuato tramite le seguenti operazioni:
 \begin{enumerate}
   \itemsep0em 
   \item conversione in caratteri minuscoli,
@@ -100,7 +100,7 @@ Il preprocessing del testo è stato effettuato tramite le seguenti operazioni:
   \item rimozione delle emoji.
 \end{enumerate}
 
-In seguito si farà riferimento sia al preprocessing completo che al preprocessing
+In seguito si farà riferimento sia al pre-processing completo che al pre-processing
 limitato, ovvero composto dalle sole operazioni "conversione in minuscolo" e
 "rimozione di punteggiatura".
 
