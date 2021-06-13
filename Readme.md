@@ -4,6 +4,8 @@ This is a project for the course Advanced Machine Learning from Università di M
 
 It consists of the kaggle challenge https://www.kaggle.com/c/mercari-price-suggestion-challenge.
 
+Special focus has been given to textual data and various approaches for text representation have been analyzed and evaluated.
+
 For more information look at:
 - the report [Project.pdf](report/Project.pdf)
 - the presentation [PresentazioneAML2021.pptx](PresentazioneAML2021.pptx)
